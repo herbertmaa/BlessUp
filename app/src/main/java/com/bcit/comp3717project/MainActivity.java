@@ -3,24 +3,20 @@ package com.bcit.comp3717project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity {
-
+    String appID = BuildConfig.APPLICATION_ID;
+    Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        MongoClientURI uri = new MongoClientURI(
-                "mongodb+srv://admin:<password>@cluster1.8lepj.mongodb.net/<dbname>?retryWrites=true&w=majority");
-
-        MongoClient mongoClient = new MongoClient(uri);
-        MongoDatabase database = mongoClient.getDatabase("test");
+        Realm.init(getApplicationContext());
+        this.realm = Realm.getDefaultInstance();
 
     }
 }
