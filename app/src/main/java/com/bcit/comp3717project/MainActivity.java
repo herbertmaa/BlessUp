@@ -3,6 +3,7 @@ package com.bcit.comp3717project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import io.realm.Realm;
 
@@ -15,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Realm.init(getApplicationContext());
         this.realm = Realm.getDefaultInstance();
-
+        Log.e(TAG, "Hello World");
     }
 }
