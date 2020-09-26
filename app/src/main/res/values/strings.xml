@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">COMP3717 Project</string>
+    <string name="selectReligion">Please select your Religion</string>
 </resources>
