@@ -13,6 +13,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "MONGODB_APPID", MONGODB_APPID)
+        buildConfigField("String", "MONGODB_APIKEY", MONGODB_APIKEY)
+
 
     }
 
