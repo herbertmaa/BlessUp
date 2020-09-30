@@ -12,7 +12,7 @@
         android:layout_width="151dp"
         android:layout_height="148dp"
         android:background="@drawable/buddhism"
-        android:text="Button"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.103"
@@ -25,7 +25,7 @@
         android:layout_width="151dp"
         android:layout_height="148dp"
         android:background="@drawable/christianity"
-        android:text="Button"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.873"
@@ -38,7 +38,7 @@
         android:layout_width="151dp"
         android:layout_height="148dp"
         android:background="@drawable/islam"
-        android:text="Button"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.873"
@@ -51,7 +51,7 @@
         android:layout_width="151dp"
         android:layout_height="148dp"
         android:background="@drawable/hinduism"
-        android:text="Button"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.103"
@@ -64,7 +64,7 @@
         android:layout_width="151dp"
         android:layout_height="148dp"
         android:background="@drawable/judaism"
-        android:text="Button"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,15 +73,28 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="323dp"
-        android:layout_height="37dp"
+        android:layout_width="168dp"
+        android:layout_height="36dp"
         android:capitalize="characters"
         android:text="@string/selectReligion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.828" />
 
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="181dp"
+        android:layout_height="51dp"
+        android:text="CONFIRM"
+        android:onClick="onConfirmClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
