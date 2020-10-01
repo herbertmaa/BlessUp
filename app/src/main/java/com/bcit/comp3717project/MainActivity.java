@@ -10,10 +10,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public void onLoginClick(View view) {
@@ -23,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSelectChurchClick(View view) {
         Intent i = new Intent(this, ChurchListingsActivity.class);
+        startActivity(i);
+    }
+
+    public void onSelectReligionClick(View view) {
+        Intent i = new Intent(this, ReligionSelectionActivity.class);
         startActivity(i);
     }
 }
