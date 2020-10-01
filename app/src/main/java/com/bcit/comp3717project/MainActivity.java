@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void onSelectChurchClick(View view) {
-        Intent i = new Intent(this, ChurchListingsActivity.class);
+    public void onSelectReligionClick(View view) {
+        Intent i = new Intent(this, LoginActivity.class); //TODO
         startActivity(i);
     }
 
-    public void onSelectReligionClick(View view) {
-        Intent i = new Intent(this, ReligionSelectionActivity.class);
+    public void onSelectChurchClick(View view) {
+        Intent i = new Intent(this, ChurchListingsActivity.class);
         startActivity(i);
     }
 }
