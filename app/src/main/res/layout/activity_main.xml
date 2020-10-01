@@ -3,20 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/LoginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Check out the login page here!"
-        android:onClick="onLoginClick"/>
+        android:onClick="onLoginClick" />
 
     <Button
         android:id="@+id/SelectReligionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choose your religion!"
-        android:onClick="onSelectReligionClick"
-        />
+        android:onClick="onSelectReligionClick" />
 
     <Button
         android:id="@+id/button7"

@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Log.v(TAG, "Displaying main activity contents");
         setContentView(R.layout.activity_login);
-
-
     }
 
     @Override
