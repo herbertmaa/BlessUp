@@ -88,7 +88,7 @@
         android:id="@+id/confirm"
         android:layout_width="181dp"
         android:layout_height="51dp"
-        android:text="CONFIRM"
+        android:text="@string/confirm"
         android:onClick="onConfirmClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
