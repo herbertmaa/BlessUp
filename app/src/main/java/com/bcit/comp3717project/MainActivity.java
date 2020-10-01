@@ -16,14 +16,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void onLoginClick(View view) {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
-    public void onSelectReligionClick(View view) {
-        Intent i = new Intent(this, LoginActivity.class); //TODO
+    public void onSelectChurchClick(View view) {
+        Intent i = new Intent(this, ChurchListingsActivity.class);
         startActivity(i);
     }
 }
