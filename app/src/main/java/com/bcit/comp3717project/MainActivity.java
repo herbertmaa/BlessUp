@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelectReligionClick(View view) {
-        Intent i = new Intent(this, LoginActivity.class); //TODO
+        Intent i = new Intent(this, ReligionSelectionActivity.class);
         startActivity(i);
     }
 
