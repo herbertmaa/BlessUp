@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">COMP3717 Project</string>
+    <string name="selectReligion">Please select your Religion</string>
+    <string name="confirm">CONFIRM</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

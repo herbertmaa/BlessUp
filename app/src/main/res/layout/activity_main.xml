@@ -3,34 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/LoginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Check out the login page here!"
-        android:onClick="onLoginClick"/>
+        android:onClick="onLoginClick" />
 
     <Button
         android:id="@+id/SelectReligionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choose your religion!"
-        android:onClick="onSelectReligionClick"
-        />
+        android:onClick="onSelectReligionClick" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/SelectChatButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onSelectChatClick"
-        android:text="Check out the chat layout"
-        />
+        android:text="Check out the chat layout"/>
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/SelectChurchListings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Church Listings"
+        android:onClick="onSelectChurchClick"/>
 
     <Button
         android:id="@+id/button5"
