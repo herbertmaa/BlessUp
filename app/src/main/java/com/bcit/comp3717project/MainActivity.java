@@ -20,10 +20,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelectReligionClick(View view) {
-        Intent i = new Intent(this, LoginActivity.class); //TODO
+        Intent i = new Intent(this, ReligionSelectionActivity.class); //TODO
         startActivity(i);
     }
 
+    public void onSelectChatClick(View view) {
+        Intent i = new Intent(this, ChatActivity.class);
+        startActivity(i);
+
+    }
     public void onSelectChurchClick(View view) {
         Intent i = new Intent(this, ChurchListingsActivity.class);
         startActivity(i);
