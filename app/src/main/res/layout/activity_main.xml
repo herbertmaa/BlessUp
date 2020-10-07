@@ -19,17 +19,18 @@
         android:onClick="onSelectReligionClick" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/SelectChatButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onSelectChatClick"
+        android:text="Check out the chat layout"/>
+
+    <Button
+        android:id="@+id/SelectChurchListings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Church Listings"
         android:onClick="onSelectChurchClick"/>
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
     <Button
         android:id="@+id/button5"
