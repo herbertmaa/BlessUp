@@ -33,4 +33,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, ChurchListingsActivity.class);
         startActivity(i);
     }
+
+    public void onSelectRegisterClick(View view) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
+    }
 }

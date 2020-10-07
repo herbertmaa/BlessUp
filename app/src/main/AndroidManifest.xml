@@ -18,9 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity"/>
         <activity android:name=".ReligionSelectionActivity"/>
-        <activity android:name=".ChurchListingsActivity"></activity>
+        <activity android:name=".ChurchListingsActivity"/>
+        <activity android:name=".RegisterActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

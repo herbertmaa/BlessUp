@@ -33,10 +33,11 @@
         android:onClick="onSelectChurchClick"/>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/SelectRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Register"
+        android:onClick="onSelectRegisterClick"/>
 
     <Button
         android:id="@+id/button4"
