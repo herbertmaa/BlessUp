@@ -40,8 +40,11 @@
         android:onClick="onSelectRegisterClick"/>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/SelectMapButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:onClick="onSelectMapClick"
+        android:text="Map Activity" />
+
+
 </LinearLayout>
