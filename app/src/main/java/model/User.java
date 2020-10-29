@@ -108,12 +108,12 @@ public class User {
         this.religion = religion;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public int getAge() {
