@@ -16,4 +16,4 @@
 .cxx
 gradle.properties
 .gradle
-google-services.json
+app/google-services.json
