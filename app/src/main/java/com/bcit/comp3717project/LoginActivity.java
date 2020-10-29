@@ -1,148 +1,60 @@
 package com.bcit.comp3717project;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
-import android.content.Intent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.LoginManager;
-import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
-import io.realm.Realm;
-import io.realm.mongodb.Credentials;
-import io.realm.mongodb.App;
-import io.realm.mongodb.User;
-import io.realm.mongodb.AppConfiguration;
-import io.realm.mongodb.App.Result;
-
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends FireBaseActivity {
 
     private static final String TAG = "MainActivity";
-    private LoginManager loginManager;
-    private CallbackManager callbackManager;
-    private LoginButton loginButton;
-    private User user;
-    private String appID = BuildConfig.MONGODB_APPID;
-    private App app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        Realm.init(this);
-        app = new App(new AppConfiguration.Builder(appID).build());
-        callbackManager = CallbackManager.Factory.create();
-
         Log.v(TAG, "Displaying main activity contents");
         setContentView(R.layout.activity_login);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override/**/
-    protected void onStart(){
-        super.onStart();
-        Log.v(TAG, getLineNumber() + "Starting main activity");
-
-        loginButton = findViewById(R.id.login_button);
-        if(loginButton != null)
-        {
-            loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    Log.v(TAG, "successful login");
-                }
-
-                @Override
-                public void onCancel() {
-                    Log.v(TAG, "user cancelled");
-                }
-
-                @Override
-                public void onError(FacebookException exception) {
-                    Log.v(TAG, "facebook error");
-                }
-            });
-        }
-        else{
-            Log.v(TAG, "login button is null zzz wtf?");
-
-        }
-    }
-
-    public void logOut(View view) {
-        if(user != null){
-            user.logOutAsync(new App.Callback<User>(){
-                public void onResult(Result<User> callback ) {
-
-                    Log.v(TAG, getLineNumber() + user.getState().toString());
-                    if (callback.isSuccess()) {
-                        Log.v(TAG, "Successfully logged out user");
-                        Log.v(TAG, getLineNumber() + user.getState().toString());
-                        user = null;
-
-                    } else {
-                        Log.v(TAG, callback.getError().toString());
-                        Log.v(TAG, getLineNumber() + user.getState().toString());
-
-                    }
-                }
-            });
-        }
-    }
-
     public void logIn(View view) {
 
-        Credentials anonymousCredentials = Credentials.anonymous();
+        EditText email = findViewById(R.id.emailTextField);
+        EditText password = findViewById(R.id.emailPasswordTextField);
 
-        if (user != null) {
-            Log.v(TAG, getLineNumber() + "Not trying to login as user exists: " + user.getState().toString());
-            return;
-        }
-
-        app.loginAsync(anonymousCredentials, new App.Callback<User>() {
+        auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
-            public void onResult(Result<User> callback) {
-                if (callback.isSuccess()) {
-                    Log.v(TAG, getLineNumber() + "Successfully authenticated anonymously.");
-                    user = app.currentUser();
-                    Log.v(TAG, "USER LOGGED IN: " + user.getId());
-                    Toast toast = Toast.makeText(getApplicationContext(), "User logged in: " + user.getId(), Toast.LENGTH_LONG);
-                    toast.show();
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success");
+                    FirebaseUser user = auth.getCurrentUser();
+                    updateUI(user);
                 } else {
-                    Log.v(TAG, getLineNumber() + callback.getError().toString());
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    updateUI(null);
                 }
             }
         });
+
     }
 
-    public static String getLineNumber(){
-        return Thread.currentThread().getStackTrace()[2].getLineNumber() + ": ";
+    @Override
+    public void updateUI(FirebaseUser user){
+
+        //TODO update logic to display changes
+        Log.e(TAG, user.toString());
     }
 
 
-    public void registerUser(String email, String password){
-
-        app.getEmailPassword().registerUserAsync(email, password, it ->{
-
-            if (it.isSuccess()) {
-                Log.i(TAG,"Successfully registered user.");
-            } else {
-                Log.e(TAG,"Failed to register user: ${it.error}");
-            }
-
-        });
-    }
 }
