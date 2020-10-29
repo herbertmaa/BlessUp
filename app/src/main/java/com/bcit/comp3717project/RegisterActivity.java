@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    //widgets and firebaseauth
     EditText FullName, Email, Password;
     Button Register;
     FirebaseAuth fAuth;
@@ -59,7 +60,5 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 }
