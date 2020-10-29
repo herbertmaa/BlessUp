@@ -21,6 +21,7 @@ public class FireBaseActivity extends AppCompatActivity {
         Log.e(TAG, user.toString());
     }
 
+    //Override this method in your Activity and call super.onCreate(savedInstanceState)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
