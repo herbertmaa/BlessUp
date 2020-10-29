@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChurchListingsActivity"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +19,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity"/>
         <activity android:name=".ReligionSelectionActivity"/>
-        <activity android:name=".ChurchListingsActivity"></activity>
+        <activity android:name=".ChurchListingsActivity"/>
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".MapActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

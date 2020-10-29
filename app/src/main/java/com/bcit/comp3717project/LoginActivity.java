@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -62,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     Log.v(TAG, "successful login");
-
                 }
 
                 @Override
@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logIn(View view) {
+
         Credentials anonymousCredentials = Credentials.anonymous();
 
         if (user != null) {
@@ -117,6 +118,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (callback.isSuccess()) {
                     Log.v(TAG, getLineNumber() + "Successfully authenticated anonymously.");
                     user = app.currentUser();
+                    Log.v(TAG, "USER LOGGED IN: " + user.getId());
+                    Toast toast = Toast.makeText(getApplicationContext(), "User logged in: " + user.getId(), Toast.LENGTH_LONG);
+                    toast.show();
                 } else {
                     Log.v(TAG, getLineNumber() + callback.getError().toString());
                 }
@@ -128,4 +132,17 @@ public class LoginActivity extends AppCompatActivity {
         return Thread.currentThread().getStackTrace()[2].getLineNumber() + ": ";
     }
 
+
+    public void registerUser(String email, String password){
+
+        app.getEmailPassword().registerUserAsync(email, password, it ->{
+
+            if (it.isSuccess()) {
+                Log.i(TAG,"Successfully registered user.");
+            } else {
+                Log.e(TAG,"Failed to register user: ${it.error}");
+            }
+
+        });
+    }
 }
