@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         myRef.setValue("Hello, World!");
     }
 
-    public void onLoginClick(View view) {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
-    }
+   public void onLoginClick(View view) {
+       Intent i = new Intent(this, LoginActivity.class);
+       startActivity(i);
+   }
 
     public void onSelectReligionClick(View view) {
         Intent i = new Intent(this, ReligionSelectionActivity.class);
