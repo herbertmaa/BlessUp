@@ -1,8 +1,7 @@
 package model;
 
-import io.realm.RealmObject;
 
-public class User extends RealmObject {
+public class User {
         private String name;
         private int age;
         public String getName() { return name; }
