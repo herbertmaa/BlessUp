@@ -3,6 +3,7 @@
     <string name="selectReligion">Please select your Religion</string>
     <string name="confirm">CONFIRM</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_name">Full Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
