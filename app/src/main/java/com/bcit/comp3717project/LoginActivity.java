@@ -49,7 +49,6 @@ public class LoginActivity extends FireBaseActivity {
             });
 
         }
-
     }
 
     @Override
@@ -58,6 +57,5 @@ public class LoginActivity extends FireBaseActivity {
         //TODO update logic to display changes
         Log.e(TAG, user.toString());
     }
-
 
 }
