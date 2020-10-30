@@ -1,6 +1,5 @@
 package model;
 
-
 import android.location.Location;
 
 import java.util.Calendar;
