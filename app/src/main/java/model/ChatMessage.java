@@ -6,8 +6,16 @@ public class ChatMessage {
     private String messageID;
     private String message;
     private User createdBy;
-    private Calendar createdAt;
+    private String createdAt;
     private String messageType;
+
+    public ChatMessage() {};
+
+    public ChatMessage(String messageID, String message, String createdAt) {
+        this.messageID = messageID;
+        this.message = message;
+        this.createdAt = createdAt;
+    }
 
     public String getMessageID() {
         return messageID;
@@ -33,11 +41,11 @@ public class ChatMessage {
         this.createdBy = createdBy;
     }
 
-    public Calendar getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Calendar createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
