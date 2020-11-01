@@ -5,6 +5,7 @@ import android.location.Location;
 import java.util.Calendar;
 
 public class User {
+
     private String userID;
     private String password;
     private String firstName;
@@ -18,6 +19,11 @@ public class User {
     private Religion religion;
     private UserType userType;
     private int age;
+
+    public User() {
+        this.firstName = "HAM";
+        this.lastName = "Demo";
+    }
 
     public String getId() {
         return userID;
