@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegisterActivity extends AppCompatActivity {
 
     //widgets and firebaseauth
-    EditText FullName, Email, Password;
+    EditText FullName, UserEmail, Password, PasswordConfirm;
     Button Register;
     FirebaseAuth fAuth;
 
@@ -31,22 +31,24 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        FullName = findViewById(R.id.FullNameTextField);
-        Email = findViewById(R.id.emailTextField);
+        FullName = findViewById(R.id.FullName);
+        UserEmail = findViewById(R.id.UserEmail);
         Password = findViewById(R.id.emailPasswordTextField);
-
+        PasswordConfirm = findViewById(R.id.rePassword);
         fAuth = FirebaseAuth.getInstance();
 
-        if(fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
+
+        //add back once login button is implemented.
+//        if(fAuth.getCurrentUser() != null) {
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            finish();
+//        }
 
     }
 
     public void register(View view) {
 
-        String email = Email.getText().toString().trim();
+        String email = UserEmail.getText().toString().trim();
         String password = Password.getText().toString().trim();
 
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

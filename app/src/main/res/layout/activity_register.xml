@@ -6,71 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <EditText
-        android:id="@+id/FullNameTextField"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="344dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/prompt_name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/emailTextField"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/emailPasswordTextField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
-        android:ems="10"
-        android:hint="@string/prompt_password"
-        android:inputType="textPassword"
+        android:layout_margin="100dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextField"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/emailTextField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:ems="10"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="register"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailPasswordTextField"
-        app:layout_constraintVertical_bias="0.131" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="206dp"
-        android:layout_height="340dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/praying" />
+        app:layout_constraintVertical_bias="0.332">
+
+
+        <EditText
+            android:id="@+id/FullName"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_name"
+            android:inputType="textPersonName"
+            android:textColor="@color/editTextColor"
+            android:paddingLeft="15dp" />
+
+        <EditText
+            android:id="@+id/UserEmail"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/editTextColor"
+            android:paddingLeft="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/DateOfBirth"
+            android:textSize="18dp"
+            android:paddingLeft="15dp"/>
+
+        <DatePicker
+            android:id="@+id/UserDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
+        <EditText
+            android:id="@+id/emailPasswordTextField"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_password"
+            android:inputType="textPassword"
+            android:textColor="@color/editTextColor"
+            android:paddingLeft="15dp" />
+
+        <EditText
+            android:id="@+id/rePassword"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_repassword"
+            android:inputType="textPassword"
+            android:textColor="@color/editTextColor"
+            android:paddingLeft="15dp" />
+
+        <Button
+            android:id="@+id/loginButton"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="register"
+            android:text="@string/action_register" />
+
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
