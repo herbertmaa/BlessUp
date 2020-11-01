@@ -9,6 +9,7 @@ import android.util.Log;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     //widgets and firebaseauth
     EditText FullName, UserEmail, Password, PasswordConfirm;
     Button Register;
+    DatePicker dp;
     FirebaseAuth fAuth;
 
 
@@ -51,15 +53,12 @@ public class RegisterActivity extends AppCompatActivity {
         String email = UserEmail.getText().toString().trim();
         String password = Password.getText().toString().trim();
 
-        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
+        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            } else {
+                Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
