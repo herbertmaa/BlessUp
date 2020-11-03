@@ -16,4 +16,5 @@
     <string name="DateOfBirth">Your Date of Birth</string>
     <string name="action_register">Register</string>
     <string name="prompt_repassword">Re-Type Password</string>
+    <string name="loginTextBlurb">Join Bless Up today, to connect with your congregation and others</string>
 </resources>
