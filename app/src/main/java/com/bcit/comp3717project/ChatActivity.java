@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,7 +34,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private static final String TAG = "ChatActivity";
     private EditText editTextMessage;
-    private Button buttonSendMessage;
+    private ImageButton buttonSendMessage;
 
     ListView lvChat;
     List<ChatMessage> messagesList;
@@ -46,7 +48,6 @@ public class ChatActivity extends AppCompatActivity {
 
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
-
         databaseChat = FirebaseDatabase.getInstance().getReference("chat");
 
         buttonSendMessage.setOnClickListener(new View.OnClickListener() {
