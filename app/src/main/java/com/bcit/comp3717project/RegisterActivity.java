@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             } else {
                 Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
