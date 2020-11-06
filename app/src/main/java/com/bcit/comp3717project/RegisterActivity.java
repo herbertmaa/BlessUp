@@ -53,7 +53,7 @@ public class RegisterActivity extends FireBaseActivity {
                 FirebaseUser user = auth.getCurrentUser();
                 String userID = user.getUid();
                 User newUser = new User(userID, fullName, fullName, email);
-                DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
+                DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
                 usersReference.child(userID).setValue(newUser);
                 Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
 
