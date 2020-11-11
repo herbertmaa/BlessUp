@@ -3,28 +3,40 @@ package model;
 import android.location.Location;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class User {
 
-    private String userID;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private Calendar dateOfBirth;
-    private Location address;
-    private Church church;
-    private Calendar joinDate;
-    private Calendar lastActive;
-    private char gender;
-    private Religion religion;
-    private UserType userType;
-    private int age;
+    private String userID = null;
+    private String password = null;
+    private String firstName = null;
+    private String lastName = null;
+    private Date dateOfBirth = null;
+    private String emailAddress = null;
+    private Location address = null;
+    private Church church = null;
+    private Date joinDate = null;
+    private Date lastActive = null;
+    private String gender = null;
+    private Religion religion = null;
+    private String userType = null;
+    private int age = 0;
 
-    public User() {
-        this.firstName = "HAM";
-        this.lastName = "Demo";
+    private User() {}
+
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
+    public User(String userID, String firstName, String lastName, String emailAddress){
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.joinDate = Calendar.getInstance().getTime();
+        this.userType = "MEMBER";
+        this.lastActive = joinDate;
+    }
     public String getId() {
         return userID;
     }
@@ -57,11 +69,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Calendar getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -81,27 +93,27 @@ public class User {
         this.church = church;
     }
 
-    public Calendar getJoinDate() {
+    public Date getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(Calendar joinDate) {
+    public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
 
-    public Calendar getLastActive() {
+    public Date getLastActive() {
         return lastActive;
     }
 
-    public void setLastActive(Calendar lastActive) {
+    public void setLastActive(Date lastActive) {
         this.lastActive = lastActive;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -113,11 +125,11 @@ public class User {
         this.religion = religion;
     }
 
-    public UserType getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 

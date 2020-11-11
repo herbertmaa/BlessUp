@@ -1,31 +1,26 @@
 package com.bcit.comp3717project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import model.User;
 
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends FireBaseActivity {
 
     //widgets and firebaseauth
     EditText FullName, UserEmail, Password, PasswordConfirm;
     Button Register;
     DatePicker dp;
-    FirebaseAuth fAuth;
 
 
     @Override
@@ -37,7 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
         UserEmail = findViewById(R.id.UserEmail);
         Password = findViewById(R.id.emailPasswordTextField);
         PasswordConfirm = findViewById(R.id.rePassword);
-        fAuth = FirebaseAuth.getInstance();
 
 
         //add back once login button is implemented.
@@ -50,13 +44,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void register(View view) {
 
+        String fullName = findViewById(R.id.FullName).toString().trim();
         String email = UserEmail.getText().toString().trim();
         String password = Password.getText().toString().trim();
 
-        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
+                FirebaseUser user = auth.getCurrentUser();
+                String userID = user.getUid();
+                User newUser = new User(userID, fullName, fullName, email);
+                DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
+                usersReference.child(userID).setValue(newUser);
                 Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             } else {
                 Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
