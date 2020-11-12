@@ -2,7 +2,9 @@ package com.bcit.comp3717project;
 
 import androidx.annotation.NonNull;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends FireBaseActivity {
 
     private static final String TAG = "MainActivity";
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,8 @@ public class LoginActivity extends FireBaseActivity {
         super.onCreate(savedInstanceState);
         Log.v(TAG, "Displaying main activity contents");
         setContentView(R.layout.activity_login);
+
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
     }
 
     public void logIn(View view) {
@@ -39,6 +44,11 @@ public class LoginActivity extends FireBaseActivity {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = auth.getCurrentUser();
                         updateUI(user);
+
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("email", email.getText().toString());
+                        editor.putString("displayName", user.getDisplayName());
+                        editor.commit();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
