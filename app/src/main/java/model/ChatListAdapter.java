@@ -42,8 +42,8 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
         TextView tvCreatedOn = listViewItem.findViewById(R.id.textViewCreatedOn);
 
         ChatMessage chatMessage = messageList.get(position);
-        String firstName = "HAM DEMO";
-        tvName.setText(firstName);
+
+        tvName.setText(chatMessage.getCreatedBy().getFirstName());
         tvMessage.setText(chatMessage.getMessage());
         tvCreatedOn.setText(chatMessage.getCreatedAt());
 

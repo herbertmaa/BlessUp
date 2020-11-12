@@ -3,6 +3,7 @@ package com.bcit.comp3717project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,32 +26,38 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import model.ChatListAdapter;
 import model.ChatMessage;
 import model.User;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends FireBaseActivity {
 
     private static final String TAG = "ChatActivity";
+    SharedPreferences pref;
+
     private EditText editTextMessage;
     private ImageButton buttonSendMessage;
 
     ListView lvChat;
     List<ChatMessage> messagesList;
 
-    DatabaseReference databaseChat;
+    FirebaseAuth mAuth;
+    DatabaseReference chatCollection;
+
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
+
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
-        databaseChat = FirebaseDatabase.getInstance().getReference("chat");
+        chatCollection = FirebaseDatabase.getInstance().getReference("chat");
 
         buttonSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +73,8 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        databaseChat.addValueEventListener(new ValueEventListener() {
+
+        chatCollection.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 messagesList.clear();
@@ -90,16 +100,14 @@ public class ChatActivity extends AppCompatActivity {
             return;
         }
 
-        String messageFireBaseID = databaseChat.push().getKey();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        String userUid = firebaseUser.getUid();
+        User newUser = new User(userUid, firebaseUser.getDisplayName(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
 
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        String createdAt = "" + day + "-" + month + "-" + year;
-        ChatMessage chatMessage = new ChatMessage(messageFireBaseID, message, createdAt);
+        String messageFireBaseID = chatCollection.push().getKey();
+        ChatMessage chatMessage = new ChatMessage(messageFireBaseID, message, newUser);
 
-        Task setValueTask = databaseChat.child(messageFireBaseID).setValue(chatMessage);
+        Task setValueTask = chatCollection.child(messageFireBaseID).setValue(chatMessage);
 
         setValueTask.addOnSuccessListener(new OnSuccessListener() {
             @Override
@@ -118,4 +126,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

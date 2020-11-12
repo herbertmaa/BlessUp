@@ -53,5 +53,11 @@
         android:onClick="onSelectChurchesPageViewClick"
         android:text="View Churches Activity" />
 
+    <Button
+        android:id="@+id/SelectImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onImageClick"
+        android:text="Test Image Retrival Activity" />
 
 </LinearLayout>
