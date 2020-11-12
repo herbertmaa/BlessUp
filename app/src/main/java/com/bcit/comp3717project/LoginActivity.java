@@ -3,6 +3,7 @@ package com.bcit.comp3717project;
 import androidx.annotation.NonNull;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;

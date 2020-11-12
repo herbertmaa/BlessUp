@@ -51,4 +51,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, MapActivity.class);
         startActivity(i);
     }
+
+    public void onImageClick(View view) {
+        Intent i = new Intent(this, ImageActivity.class);
+        startActivity(i);
+    }
 }
