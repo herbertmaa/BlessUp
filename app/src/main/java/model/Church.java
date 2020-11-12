@@ -2,17 +2,28 @@ package model;
 
 import android.location.Location;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Church {
+public class Church implements Serializable {
 
     private String churchID;
     private String name;
-    private Location address;
-    private int phoneNumber;
-    private Religion religion;
+    private String address;
+    private String phoneNumber;
+    private String religion;
     private String description;
     private ArrayList<User> members;
+
+    public Church(String churchID, String name, String address, String phoneNumber, String religion, String description, ArrayList<User> members) {
+        this.churchID = churchID;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.religion = religion;
+        this.description = description;
+        this.members = members;
+    }
 
     public String getChurchID() {
         return churchID;
@@ -30,27 +41,27 @@ public class Church {
         this.name = name;
     }
 
-    public Location getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Location address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Religion getReligion() {
+    public String getReligion() {
         return religion;
     }
 
-    public void setReligion(Religion religion) {
+    public void setReligion(String religion) {
         this.religion = religion;
     }
 

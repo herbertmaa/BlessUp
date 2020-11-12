@@ -51,4 +51,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, MapActivity.class);
         startActivity(i);
     }
+
+    public void onSelectChurchesPageViewClick(View view) {
+        Intent i = new Intent(this, ViewChurchesActivity.class);
+        startActivity(i);
+    }
 }
