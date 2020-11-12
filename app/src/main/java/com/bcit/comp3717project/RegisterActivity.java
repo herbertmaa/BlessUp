@@ -2,6 +2,7 @@ package com.bcit.comp3717project;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,25 @@ public class RegisterActivity extends FireBaseActivity {
         String fullName = FullName.getText().toString().trim();
         String email = UserEmail.getText().toString().trim();
         String password = Password.getText().toString().trim();
+
+        if(TextUtils.isEmpty(email)){
+            UserEmail.setError("Email is Required.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(fullName)){
+            FullName.setError("Name is Required.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            Password.setError("Password is Required");
+            return;
+        }
+
+        if(password.length() < 6){
+            Password.setError("Password must be at least 6 characters.");
+        }
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
