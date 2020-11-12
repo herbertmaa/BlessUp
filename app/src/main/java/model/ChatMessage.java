@@ -1,5 +1,10 @@
 package model;
 
+import androidx.arch.core.executor.ArchTaskExecutor;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Calendar;
 
 public class ChatMessage {
@@ -11,9 +16,17 @@ public class ChatMessage {
 
     public ChatMessage() {};
 
-    public ChatMessage(String messageID, String message, String createdAt) {
+    public ChatMessage(String messageID, String message, User user) {
         this.messageID = messageID;
         this.message = message;
+        this.createdBy = user;
+
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        String createdAt = "" + day + "-" + month + "-" + year;
+
         this.createdAt = createdAt;
     }
 
