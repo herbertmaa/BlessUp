@@ -1,4 +1,4 @@
-package model;
+package adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import com.bcit.comp3717project.R;
 
 import java.util.List;
+
+import model.ChatMessage;
 
 public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
     private Activity context;
