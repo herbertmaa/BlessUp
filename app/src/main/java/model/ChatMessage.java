@@ -1,6 +1,16 @@
 package model;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import androidx.arch.core.executor.ArchTaskExecutor;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Calendar;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ChatMessage {
     private String messageID;
@@ -11,9 +21,17 @@ public class ChatMessage {
 
     public ChatMessage() {};
 
-    public ChatMessage(String messageID, String message, String createdAt) {
+    public ChatMessage(String messageID, String message, User user) {
         this.messageID = messageID;
         this.message = message;
+        this.createdBy = user;
+
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        String createdAt = "" + day + "-" + month + "-" + year;
+
         this.createdAt = createdAt;
     }
 
@@ -55,5 +73,12 @@ public class ChatMessage {
 
     public void setMessageType(String messageType) {
         this.messageType = messageType;
+    }
+
+    public boolean isBelongsToCurrentUser() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        firebaseUser.getUid();
+        return createdBy.getId() == firebaseUser.getUid();
     }
 }
