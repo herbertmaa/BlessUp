@@ -1,16 +1,11 @@
 package model;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import androidx.arch.core.executor.ArchTaskExecutor;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class ChatMessage {
     private String messageID;
@@ -73,12 +68,5 @@ public class ChatMessage {
 
     public void setMessageType(String messageType) {
         this.messageType = messageType;
-    }
-
-    public boolean isBelongsToCurrentUser() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-        firebaseUser.getUid();
-        return createdBy.getId() == firebaseUser.getUid();
     }
 }

@@ -30,37 +30,20 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
         this.messageList = messageList;
     }
 
-    public int getCount() {
-        return messageList.size();
-    }
-
-    public ChatMessage getChatMessageItem(int i) {
-        return messageList.get(i);
-    }
-
-    public long getChatMessageItemId(int i) {
-        return i;
-    }
-
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
 
-        ChatMessage chatMessage = messageList.get(position);
-        View listViewItem;
+        View listViewItem = inflater.inflate(R.layout.chatlist_layout, null, true);
 
-        if (chatMessage.isBelongsToCurrentUser()) {
-            listViewItem = inflater.inflate(R.layout.my_message, null, true);
-        } else {
-            listViewItem = inflater.inflate(R.layout.their_message, null, true);
-            TextView tvName = listViewItem.findViewById(R.id.textViewName);
-            tvName.setText(chatMessage.getCreatedBy().getFirstName());
-        }
-
+        TextView tvName = listViewItem.findViewById(R.id.textViewName);
         TextView tvMessage = listViewItem.findViewById(R.id.textViewMessage);
         TextView tvCreatedOn = listViewItem.findViewById(R.id.textViewCreatedOn);
 
+        ChatMessage chatMessage = messageList.get(position);
+
+        tvName.setText(chatMessage.getCreatedBy().getFirstName());
         tvMessage.setText(chatMessage.getMessage());
         tvCreatedOn.setText(chatMessage.getCreatedAt());
 
