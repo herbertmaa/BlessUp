@@ -18,7 +18,7 @@ public class User {
     private Date joinDate = null;
     private Date lastActive = null;
     private String gender = null;
-    private Religion religion = null;
+    private String religion = null;
     private String userType = null;
     private int age = 0;
 
@@ -36,6 +36,7 @@ public class User {
         this.joinDate = Calendar.getInstance().getTime();
         this.userType = "MEMBER";
         this.lastActive = joinDate;
+        this.religion = "NONE";
     }
     public String getId() {
         return userID;
@@ -117,11 +118,11 @@ public class User {
         this.gender = gender;
     }
 
-    public Religion getReligion() {
+    public String getReligion() {
         return religion;
     }
 
-    public void setReligion(Religion religion) {
+    public void setReligion(String religion) {
         this.religion = religion;
     }
 
