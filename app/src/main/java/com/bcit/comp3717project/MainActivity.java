@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }
-    
+
     public void onSelectChurchesPageViewClick(View view) {
         Intent i = new Intent(this, ViewChurchesActivity.class);
         startActivity(i);
