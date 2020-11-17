@@ -25,12 +25,6 @@
         android:onClick="onSelectChatClick"
         android:text="Check out the chat layout"/>
 
-    <Button
-        android:id="@+id/SelectChurchListings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Church Listings"
-        android:onClick="onSelectChurchClick"/>
 
     <Button
         android:id="@+id/SelectRegister"
@@ -40,25 +34,17 @@
         android:onClick="onSelectRegisterClick"/>
 
     <Button
-        android:id="@+id/SelectMapButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onSelectMapClick"
-        android:text="Map Activity" />
-
-    <Button
         android:id="@+id/SelectChurchesPageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onSelectChurchesPageViewClick"
         android:text="View Churches Activity" />
-  
+
     <Button
         android:id="@+id/SelectImageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onImageClick"
         android:text="Test Image Retrival Activity" />
-
 
 </LinearLayout>
