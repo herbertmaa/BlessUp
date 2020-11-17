@@ -1,6 +1,6 @@
 package com.bcit.comp3717project;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,20 +10,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Calendar;
 
 import model.User;
 
 
 public class RegisterActivity extends FireBaseActivity {
-
-    SharedPreferences pref;
 
     //widgets and firebaseauth
     EditText FullName, UserEmail, Password, PasswordConfirm;
@@ -36,9 +30,6 @@ public class RegisterActivity extends FireBaseActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        pref = getSharedPreferences("user_details", MODE_PRIVATE);
-
         FullName = findViewById(R.id.FullName);
         UserEmail = findViewById(R.id.UserEmail);
         Password = findViewById(R.id.emailPasswordTextField);
@@ -55,9 +46,10 @@ public class RegisterActivity extends FireBaseActivity {
 
     public void register(View view) {
 
-        String fullName = FullName.getText().toString().trim();
+        String fullName = findViewById(R.id.FullName).toString().trim();
         String email = UserEmail.getText().toString().trim();
         String password = Password.getText().toString().trim();
+        String confirmPassword = PasswordConfirm.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             UserEmail.setError("Email is Required.");
@@ -78,31 +70,25 @@ public class RegisterActivity extends FireBaseActivity {
             Password.setError("Password must be at least 6 characters.");
         }
 
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                FirebaseUser firebaseUser = auth.getCurrentUser();
-                updateUserDisplayName(fullName, firebaseUser);
+        if (!password.equals(confirmPassword)) {
+            PasswordConfirm.setError("Both passwords must be identical.");
+        }
 
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("email", email);
-                editor.putString("displayName", fullName);
-                editor.commit();
+        else {
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    FirebaseUser user = auth.getCurrentUser();
+                    String userID = user.getUid();
+                    User newUser = new User(userID, fullName, fullName, email);
+                    DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
+                    usersReference.child(userID).setValue(newUser);
+                    Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), ReligionSelectionActivity.class));
 
-                String userID = firebaseUser.getUid();
-                User newUser = new User(userID, fullName, fullName, email);
-                DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
-                usersReference.child(userID).setValue(newUser);
-                Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void updateUserDisplayName(String displayName, FirebaseUser user) {
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(displayName)
-                .build();
-        user.updateProfile(profileUpdates);
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
