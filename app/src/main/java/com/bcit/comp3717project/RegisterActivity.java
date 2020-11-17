@@ -58,6 +58,7 @@ public class RegisterActivity extends FireBaseActivity {
         String fullName = FullName.getText().toString().trim();
         String email = UserEmail.getText().toString().trim();
         String password = Password.getText().toString().trim();
+        String confirmPassword = PasswordConfirm.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             UserEmail.setError("Email is Required.");
@@ -78,27 +79,32 @@ public class RegisterActivity extends FireBaseActivity {
             Password.setError("Password must be at least 6 characters.");
         }
 
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                FirebaseUser firebaseUser = auth.getCurrentUser();
-                updateUserDisplayName(fullName, firebaseUser);
+        if (!password.equals(confirmPassword)) {
+            PasswordConfirm.setError("Both passwords must be identical.");
+        }
 
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("email", email);
-                editor.putString("displayName", fullName);
-                editor.commit();
+        else {
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    FirebaseUser firebaseUser = auth.getCurrentUser();
+                    updateUserDisplayName(fullName, firebaseUser);
 
-                String userID = firebaseUser.getUid();
-                User newUser = new User(userID, fullName, fullName, email);
-                DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
-                usersReference.child(userID).setValue(newUser);
-                Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("email", email);
+                    editor.putString("displayName", fullName);
+                    editor.commit();
+
+                    String userID = firebaseUser.getUid();
+                    User newUser = new User(userID, fullName, fullName, email);
+                    DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
+                    usersReference.child(userID).setValue(newUser);
+                    Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
-
     private void updateUserDisplayName(String displayName, FirebaseUser user) {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(displayName)

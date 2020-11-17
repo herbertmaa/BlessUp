@@ -37,18 +37,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void onSelectChurchClick(View view) {
-        Intent i = new Intent(this, ChurchListingsActivity.class);
-        startActivity(i);
-    }
 
     public void onSelectRegisterClick(View view) {
         Intent i = new Intent(this, RegisterActivity.class);
-        startActivity(i);
-    }
-
-    public void onSelectMapClick(View view) {
-        Intent i = new Intent(this, MapActivity.class);
         startActivity(i);
     }
 

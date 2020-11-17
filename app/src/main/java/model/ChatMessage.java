@@ -18,7 +18,7 @@ public class ChatMessage {
         this.messageID = messageID;
         this.message = message;
         this.createdBy = user;
-        this.createdAt = getDate();
+        this.createdAt = Calendar.getInstance().getTime();
     }
 
     public String getMessageID() {
@@ -67,9 +67,5 @@ public class ChatMessage {
         firebaseUser.getUid();
         System.out.print("BELONGS TO CURRENT USER: " + createdBy.getId() == firebaseUser.getUid());
         return createdBy.getId() == firebaseUser.getUid();
-    }
-
-    private Date getDate() {
-       return Calendar.getInstance().getTime();
     }
 }
