@@ -4,23 +4,44 @@ package com.bcit.comp3717project;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+
+import java.util.ArrayList;
 
 public class ReligionSelectionActivity extends AppCompatActivity {
 
-    Button btnBhud, btnChrist, btnJuda, btnIslam, btnHindu;
-    Animation scaleUp, scaleDown;
+    AppCompatImageButton btnBhud;
+    AppCompatImageButton btnChrist;
+    AppCompatImageButton btnJuda;
+    AppCompatImageButton btnIslam;
+    AppCompatImageButton btnHindu;
+    ArrayList<View> religionButtons = new ArrayList<>();
+    private GestureDetector gestureDetector;
 
-    @SuppressLint("ClickableViewAccessibility")
+    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            return true;
+        }
+
+    }
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_religion_selection);
+        gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
         btnBhud = findViewById(R.id.btnBuddhism);
         btnChrist = findViewById((R.id.btnChristianity));
@@ -28,82 +49,61 @@ public class ReligionSelectionActivity extends AppCompatActivity {
         btnIslam = findViewById((R.id.btnIslam));
         btnHindu = findViewById((R.id.btnHinduism));
 
-        scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
-        scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+        religionButtons.add(btnBhud);
+        religionButtons.add(btnChrist);
+        religionButtons.add(btnJuda);
+        religionButtons.add(btnIslam);
+        religionButtons.add(btnHindu);
 
-        btnBhud.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+        btnBhud.setOnTouchListener(initAnimateClickListener());
 
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
-                    btnBhud.startAnimation(scaleUp);
-                }
-                else if (motionEvent.getAction()==MotionEvent.ACTION_UP) {
-                    btnBhud.startAnimation(scaleDown);
-                }
-                return true;
-            }
-        });
+        btnChrist.setOnTouchListener(initAnimateClickListener());
 
-        btnChrist.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+        btnJuda.setOnTouchListener(initAnimateClickListener());
 
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
-                    btnChrist.startAnimation(scaleUp);
-                }
-                else if (motionEvent.getAction()==MotionEvent.ACTION_UP) {
-                    btnChrist.startAnimation(scaleDown);
-                }
-                return true;
-            }
-        });
+        btnIslam.setOnTouchListener(initAnimateClickListener());
 
-        btnJuda.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+        btnHindu.setOnTouchListener(initAnimateClickListener());
 
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
-                    btnJuda.startAnimation(scaleUp);
-                }
-                else if (motionEvent.getAction()==MotionEvent.ACTION_UP) {
-                    btnJuda.startAnimation(scaleDown);
-                }
-                return true;
-            }
-        });
-
-        btnIslam.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
-                    btnIslam.startAnimation(scaleUp);
-                }
-                else if (motionEvent.getAction()==MotionEvent.ACTION_UP) {
-                    btnIslam.startAnimation(scaleDown);
-                }
-                return true;
-            }
-        });
-
-        btnHindu.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
-                    btnHindu.startAnimation(scaleUp);
-                }
-                else if (motionEvent.getAction()==MotionEvent.ACTION_UP) {
-                    btnHindu.startAnimation(scaleDown);
-                }
-                return true;
-            }
-        });
     }
 
     public void onConfirmClick(View view) {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
+    private AppCompatImageButton.OnTouchListener initAnimateClickListener() {
+        Animation scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
+        Animation scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+
+        View.OnTouchListener animateClick = new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.e("MM", Boolean.toString(gestureDetector.onTouchEvent(motionEvent)));
+                if (gestureDetector.onTouchEvent(motionEvent)) {
+                    AlphaAnimation alphaAnim = new AlphaAnimation(0.2f, 1.0f);
+                    alphaAnim.setDuration(1000);
+                    alphaAnim.setStartOffset(200);
+                    alphaAnim.setFillAfter(true);
+                    view.startAnimation(alphaAnim);
+
+                    for (View otherV : religionButtons) {
+                        if (otherV.getId() == view.getId()) continue;
+                        AlphaAnimation reverseAlphaAnim = new AlphaAnimation(1.0f, 0.2f);
+                        reverseAlphaAnim.setDuration(1000);
+                        reverseAlphaAnim.setStartOffset(500);
+                        reverseAlphaAnim.setFillAfter(true);
+                        otherV.startAnimation(reverseAlphaAnim);
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+        };
+        return animateClick;
+    }
+
+
 }
