@@ -60,12 +60,4 @@ public class ChatMessage {
     public void setMessageType(String messageType) {
         this.messageType = messageType;
     }
-
-    public boolean isBelongsToCurrentUser() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-        firebaseUser.getUid();
-        System.out.print("BELONGS TO CURRENT USER: " + createdBy.getId() == firebaseUser.getUid());
-        return createdBy.getId() == firebaseUser.getUid();
-    }
 }
