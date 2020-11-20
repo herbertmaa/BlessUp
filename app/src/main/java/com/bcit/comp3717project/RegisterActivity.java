@@ -1,5 +1,6 @@
 package com.bcit.comp3717project;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -99,6 +100,8 @@ public class RegisterActivity extends FireBaseActivity {
                     DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
                     usersReference.child(userID).setValue(newUser);
                     Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(this, ReligionSelectionActivity.class);
+                    startActivity(i);
                 } else {
                     Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
