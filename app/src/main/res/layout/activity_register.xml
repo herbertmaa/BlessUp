@@ -106,7 +106,7 @@
             android:paddingLeft="15dp"
             android:textColor="@color/editTextColor" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/loginButton"
             style="@style/linearLayoutChildren"
             android:layout_width="match_parent"

@@ -1,7 +1,8 @@
-package model;
+package adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import androidx.annotation.NonNull;
 
 import com.bcit.comp3717project.R;
 
+import java.util.Date;
 import java.util.List;
+
+import model.ChatMessage;
 
 public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
     private Activity context;
@@ -62,8 +66,14 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
         TextView tvCreatedOn = listViewItem.findViewById(R.id.textViewCreatedOn);
 
         tvMessage.setText(chatMessage.getMessage());
-        tvCreatedOn.setText(chatMessage.getCreatedAt());
+        tvCreatedOn.setText(formatTime(chatMessage.getCreatedAt()));
 
         return listViewItem;
+    }
+
+    private String formatTime(Date date) {
+        String delegate = "hh:mm aaa";
+        String formattedTime = (String) DateFormat.format(delegate, date);
+        return formattedTime.charAt(0) == '0' ? formattedTime.substring(1) : formattedTime;
     }
 }
