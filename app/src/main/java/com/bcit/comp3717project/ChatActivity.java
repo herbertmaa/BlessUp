@@ -44,16 +44,12 @@ public class ChatActivity extends FireBaseActivity {
 
     DatabaseReference chatCollection;
 
-    FirebaseAuth auth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
-        auth = FirebaseAuth.getInstance();
+        
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
-
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
         chatCollection = FirebaseDatabase.getInstance().getReference("chat");
