@@ -47,4 +47,11 @@
         android:onClick="onImageClick"
         android:text="Test Image Retrival Activity" />
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:onClick="onLogoutClick">
+    </Button>
 </LinearLayout>
