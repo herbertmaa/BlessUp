@@ -42,7 +42,6 @@ public class ChatActivity extends FireBaseActivity {
     ListView lvChat;
     List<ChatMessage> messagesList;
 
-    FirebaseAuth mAuth;
     DatabaseReference chatCollection;
 
     User user;
@@ -101,6 +100,7 @@ public class ChatActivity extends FireBaseActivity {
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
         String userUid = firebaseUser.getUid();
+        System.out.println("SYSTEM USER UUID: " + userUid);
         User newUser = new User(userUid, firebaseUser.getDisplayName(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
 
         String messageFireBaseID = chatCollection.push().getKey();
