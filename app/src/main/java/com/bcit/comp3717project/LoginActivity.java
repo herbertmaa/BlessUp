@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -65,7 +64,7 @@ public class LoginActivity extends FireBaseActivity {
     public void updateUI(FirebaseUser user){
 
         //TODO update logic to display changes
-        Log.e(TAG, user.toString());
+        //Log.e(TAG, user.toString());
     }
 
 }
