@@ -39,7 +39,7 @@
             android:paddingLeft="40dp"
             android:text="12:00 AM"
             android:textAlignment="viewEnd"
-            android:textColor="#666666"
+            android:textColor="@color/chatMyTimeStamp1"
             android:textStyle="italic"
             tools:ignore="RtlCompat" />
     </RelativeLayout>
