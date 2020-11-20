@@ -48,7 +48,7 @@ public class ChatActivity extends FireBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        
+
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
