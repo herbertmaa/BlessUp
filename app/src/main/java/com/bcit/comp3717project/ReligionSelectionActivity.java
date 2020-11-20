@@ -3,6 +3,7 @@ package com.bcit.comp3717project;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -12,14 +13,22 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
-public class ReligionSelectionActivity extends AppCompatActivity {
+import model.User;
 
+public class ReligionSelectionActivity extends FireBaseActivity {
+
+    SharedPreferences pref;
     AppCompatImageButton btnBhud;
     AppCompatImageButton btnChrist;
     AppCompatImageButton btnJuda;
@@ -27,6 +36,7 @@ public class ReligionSelectionActivity extends AppCompatActivity {
     AppCompatImageButton btnHindu;
     ArrayList<View> religionButtons = new ArrayList<>();
     private GestureDetector gestureDetector;
+    String religionChoice = "NONE";
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
 
@@ -55,24 +65,29 @@ public class ReligionSelectionActivity extends AppCompatActivity {
         religionButtons.add(btnIslam);
         religionButtons.add(btnHindu);
 
-        btnBhud.setOnTouchListener(initAnimateClickListener());
+        btnBhud.setOnTouchListener(initAnimateClickListener("Christianity"));
 
-        btnChrist.setOnTouchListener(initAnimateClickListener());
+        btnChrist.setOnTouchListener(initAnimateClickListener("Bhuddhism"));
 
-        btnJuda.setOnTouchListener(initAnimateClickListener());
+        btnJuda.setOnTouchListener(initAnimateClickListener("Judaism"));
 
-        btnIslam.setOnTouchListener(initAnimateClickListener());
+        btnIslam.setOnTouchListener(initAnimateClickListener("Islam"));
 
-        btnHindu.setOnTouchListener(initAnimateClickListener());
+        btnHindu.setOnTouchListener(initAnimateClickListener("Hinduism"));
 
     }
 
     public void onConfirmClick(View view) {
-        Intent i = new Intent(this, MainActivity.class);
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        String userID = firebaseUser.getUid();
+        DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
+        usersReference.child(userID).child("religion").setValue(religionChoice);
+        Toast.makeText(ReligionSelectionActivity.this, "You've chosen " + religionChoice, Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, ViewChurchesActivity.class);
         startActivity(i);
     }
 
-    private AppCompatImageButton.OnTouchListener initAnimateClickListener() {
+    private AppCompatImageButton.OnTouchListener initAnimateClickListener(String r) {
         Animation scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
         Animation scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
 
@@ -82,6 +97,7 @@ public class ReligionSelectionActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Log.e("MM", Boolean.toString(gestureDetector.onTouchEvent(motionEvent)));
                 if (gestureDetector.onTouchEvent(motionEvent)) {
+                    religionChoice = r;
                     AlphaAnimation alphaAnim = new AlphaAnimation(0.2f, 1.0f);
                     alphaAnim.setDuration(1000);
                     alphaAnim.setStartOffset(200);
