@@ -42,10 +42,7 @@ public class ChatActivity extends FireBaseActivity {
     ListView lvChat;
     List<ChatMessage> messagesList;
 
-    FirebaseAuth mAuth;
     DatabaseReference chatCollection;
-
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +50,6 @@ public class ChatActivity extends FireBaseActivity {
         setContentView(R.layout.activity_chat);
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
-
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
         chatCollection = FirebaseDatabase.getInstance().getReference("chat");
