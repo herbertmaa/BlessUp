@@ -44,13 +44,14 @@ public class ChatActivity extends FireBaseActivity {
 
     DatabaseReference chatCollection;
 
-    User user;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        auth = FirebaseAuth.getInstance();
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
 
         editTextMessage = findViewById(R.id.editTextMessage);
@@ -100,7 +101,6 @@ public class ChatActivity extends FireBaseActivity {
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
         String userUid = firebaseUser.getUid();
-        System.out.println("SYSTEM USER UUID: " + userUid);
         User newUser = new User(userUid, firebaseUser.getDisplayName(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
 
         String messageFireBaseID = chatCollection.push().getKey();

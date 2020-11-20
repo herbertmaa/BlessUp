@@ -82,8 +82,6 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
     public boolean belongsToCurrentUser(ChatMessage chatMessage) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
-        firebaseUser.getUid();
-        System.out.print("BELONGS TO CURRENT USER: " + chatMessage.getCreatedBy().getId() == firebaseUser.getUid());
         return chatMessage.getCreatedBy().getId().equals(firebaseUser.getUid());
     }
 }
