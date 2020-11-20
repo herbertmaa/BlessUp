@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FireBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,5 +52,11 @@ public class MainActivity extends AppCompatActivity {
     public void onImageClick(View view) {
         Intent i = new Intent(this, ImageActivity.class);
         startActivity(i);
+    }
+
+    public void onLogoutClick(View view) {
+        auth.signOut();
+        Toast t = Toast.makeText(this, "Logged user out", Toast.LENGTH_LONG);
+        t.show();
     }
 }
