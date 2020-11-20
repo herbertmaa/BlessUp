@@ -65,9 +65,9 @@ public class ReligionSelectionActivity extends FireBaseActivity {
         religionButtons.add(btnIslam);
         religionButtons.add(btnHindu);
 
-        btnBhud.setOnTouchListener(initAnimateClickListener("Christianity"));
+        btnBhud.setOnTouchListener(initAnimateClickListener("Bhuddhism"));
 
-        btnChrist.setOnTouchListener(initAnimateClickListener("Bhuddhism"));
+        btnChrist.setOnTouchListener(initAnimateClickListener("Christianity"));
 
         btnJuda.setOnTouchListener(initAnimateClickListener("Judaism"));
 
