@@ -1,22 +1,15 @@
 package model;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
-import androidx.arch.core.executor.ArchTaskExecutor;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.Calendar;
-
-import static android.content.Context.MODE_PRIVATE;
+import java.util.Date;
 
 public class ChatMessage {
     private String messageID;
     private String message;
     private User createdBy;
-    private String createdAt;
+    private Date createdAt;
     private String messageType;
 
     public ChatMessage() {};
@@ -25,14 +18,7 @@ public class ChatMessage {
         this.messageID = messageID;
         this.message = message;
         this.createdBy = user;
-
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        String createdAt = "" + day + "-" + month + "-" + year;
-
-        this.createdAt = createdAt;
+        this.createdAt = Calendar.getInstance().getTime();
     }
 
     public String getMessageID() {
@@ -59,11 +45,11 @@ public class ChatMessage {
         this.createdBy = createdBy;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -79,6 +65,7 @@ public class ChatMessage {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
         firebaseUser.getUid();
+        System.out.print("BELONGS TO CURRENT USER: " + createdBy.getId() == firebaseUser.getUid());
         return createdBy.getId() == firebaseUser.getUid();
     }
 }

@@ -13,7 +13,16 @@ public class Church implements Serializable {
     private String phoneNumber;
     private String religion;
     private String description;
+    private String imageURL;
     private ArrayList<User> members;
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
     public Church(String churchID, String name, String address, String phoneNumber, String religion, String description, ArrayList<User> members) {
         this.churchID = churchID;
@@ -23,6 +32,7 @@ public class Church implements Serializable {
         this.religion = religion;
         this.description = description;
         this.members = members;
+        this.imageURL = null;
     }
 
     public String getChurchID() {

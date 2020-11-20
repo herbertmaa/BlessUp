@@ -1,9 +1,7 @@
 <resources>
     <!-- Base application theme. -->
-    <!--Material UI -->
-    <!--style name="AppTheme" parent="Theme.MaterialComponents.Light" -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -17,5 +15,19 @@
         <item name="android:layout_height"> 50dp </item>
     </style>
 
+    <style name="GenericProgressBackground" parent="android:Theme">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">#DD111111</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="emptyButton">
+
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
+
+
+    </style>
 
 </resources>

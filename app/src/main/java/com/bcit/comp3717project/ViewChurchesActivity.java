@@ -8,12 +8,14 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fragment.ListChurches;
+import fragment.MapChurches;
 
 public class ViewChurchesActivity extends AppCompatActivity {
 
@@ -57,10 +59,10 @@ public class ViewChurchesActivity extends AppCompatActivity {
         ViewPager pager = findViewById(R.id.pager);
         tabLayout.setupWithViewPager(pager);
 
-        SectionsPageAdapter pagerAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        SectionsPageAdapter pagerAdapter = new SectionsPageAdapter(getSupportFragmentManager()){};
         pagerAdapter.addFragment(new ListChurches(), "List");
         pagerAdapter.addFragment(new MapChurches(), "Map");
-        Log.e("VIEWCHURCHES", "SHOULD OF ADDED MAPCHURCHES?");
         pager.setAdapter(pagerAdapter);
+
     }
 }
