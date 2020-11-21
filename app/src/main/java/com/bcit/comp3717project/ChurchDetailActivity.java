@@ -24,8 +24,6 @@ public class ChurchDetailActivity extends AppCompatActivity {
         Church church = (Church) getIntent().getExtras().get("church");
 
         if(church != null){
-
-            Log.e("TEST","IN IF STATEMENT");
             TextView church_name = findViewById(R.id.church_name);
             church_name.setText(church.getName());
 
