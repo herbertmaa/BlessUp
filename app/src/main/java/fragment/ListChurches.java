@@ -52,17 +52,17 @@ public class ListChurches extends Fragment {
         //TODO retrieve from firebase and then create these churches
         ArrayList<Church> churches = new ArrayList<>();
 
-        Church c1 = new Church("123" , "Willingdon Church", "4812 Willingdon Ave, Burnaby", "604-435-5544", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
+        Church c1 = new Church("123", "Willingdon Church", "4812 Willingdon Ave, Burnaby", "604-435-5544", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
         c1.setImageURL("pictures/willingdon.png");
-        Church c2 = new Church("234" , "Renfrew Baptist Church", "4812 Willingdon Ave, Burnaby", "604-253-2089", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
+        Church c2 = new Church("234", "Renfrew Baptist Church", "4812 Willingdon Ave, Burnaby", "604-253-2089", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
         c2.setImageURL("pictures/renfrew.png");
-        Church c3 = new Church("345" , "Pacific Grace MB Church Vancouver", "4812 Willingdon Ave, Burnaby", "604-255-6199", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
+        Church c3 = new Church("345", "Pacific Grace MB Church Vancouver", "4812 Willingdon Ave, Burnaby", "604-255-6199", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
         c3.setImageURL("pictures/pacific_grace.png");
-        Church c4 = new Church("456" , "West Coast Christian Fellowship", "4812 Willingdon Ave, Burnaby", "604-255-7301", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
+        Church c4 = new Church("456", "West Coast Christian Fellowship", "4812 Willingdon Ave, Burnaby", "604-255-7301", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
         c4.setImageURL("pictures/westcoast_fellowship.png");
-        Church c5 = new Church("567" , "Broadway Church", "4812 Willingdon Ave, Burnaby", "604-253-2700", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
+        Church c5 = new Church("567", "Broadway Church", "4812 Willingdon Ave, Burnaby", "604-253-2700", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
         c5.setImageURL("pictures/broadway_church.png");
-        Church c6 = new Church("678" , "City Baptist Church", "4812 Willingdon Ave, Burnaby", "604-562-0887", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
+        Church c6 = new Church("678", "City Baptist Church", "4812 Willingdon Ave, Burnaby", "604-562-0887", "Christianity", "Willingdon Church is a community church; international in attendance, biblical in its message, uplifting in its worship and committed in its service to all ages ", null);
         c6.setImageURL("pictures/city_baptist.png");
 
         churches.add(c1);
@@ -74,7 +74,7 @@ public class ListChurches extends Fragment {
 
 
         Church[] church_array = churches.toArray(new Church[churches.size()]);
-        ChurchAdapter adapter = new ChurchAdapter(church_array); ///TODO add images?
+        ChurchAdapter adapter = new ChurchAdapter(church_array);
 
         mapRecycler.setAdapter(adapter);
         GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 1);
