@@ -34,7 +34,8 @@ public class ChurchDetailActivity extends AppCompatActivity {
             church_address.setText(church.getAddress());
 
             TextView church_number = findViewById(R.id.church_number);
-            church_address.setText(church.getPhoneNumber());
+            church_number.setText(church.getPhoneNumber());
+
 //            ImageView church_image = findViewById(R.id.church_image);
 //            church_image.setImageDrawable(ContextCompat.getDrawable(this,);
 //            church_image.setContentDescription(church.getName());
