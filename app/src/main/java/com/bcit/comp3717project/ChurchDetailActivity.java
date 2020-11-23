@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -90,6 +91,8 @@ public class ChurchDetailActivity extends FireBaseActivity {
                 User u = snapshot.getValue(User.class);
                 church.addUser(u);
                 FirebaseDatabase.getInstance().getReference("churches").child(church.getChurchID()).setValue(church);
+                Toast toast = Toast.makeText(getApplicationContext(), "You've joined this church!", Toast.LENGTH_LONG);
+                toast.show();
             }
 
             @Override
