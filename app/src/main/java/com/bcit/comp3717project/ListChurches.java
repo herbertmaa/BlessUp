@@ -71,9 +71,6 @@ public class ListChurches extends Fragment {
         });
 
         Church[] church_array = churches.toArray(new Church[churches.size()]);
-        for(int i = 0; i < church_array.length; i++){
-            Log.e("TEST", church_array[i].getChurchID());
-        }
         ChurchAdapter adapter = new ChurchAdapter(church_array);
 
         mapRecycler.setAdapter(adapter);
