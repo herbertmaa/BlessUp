@@ -19,8 +19,6 @@ public class MainActivity extends FireBaseActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
     }
 
    public void onLoginClick(View view) {
