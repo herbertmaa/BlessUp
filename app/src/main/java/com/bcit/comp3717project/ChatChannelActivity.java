@@ -70,6 +70,11 @@ public class ChatChannelActivity extends FireBaseActivity {
     }
 
     @Override
+    protected void onLogin() {
+        //todo?
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
     }
