@@ -118,12 +118,39 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
+        float zoomLevel = 16.0f;
         LatLng vancouver = new LatLng(49.2827, -123.1207);
         mMap.addMarker(new MarkerOptions().position(vancouver).title("Marker in Vancouver"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vancouver, zoomLevel));
         mMap.setMinZoomPreference(6.0f);
         mMap.setMaxZoomPreference(14.0f);
+
+        //Willingdon Church marker
+        LatLng c1 = new LatLng(49.2410393,-123.0049571);
+        mMap.addMarker(new MarkerOptions().position(c1).title("Willingdon Church"));
+
+        //Renfrew Baptist Church marker
+        LatLng c2 = new LatLng(49.2678501,-123.0445683);
+        mMap.addMarker(new MarkerOptions().position(c2).title("Renfrew Baptist Church"));
+
+        //Pacific Grace MB Church Vancouver
+        LatLng c3 = new LatLng(49.2522421,-123.1040729);
+        mMap.addMarker(new MarkerOptions().position(c3).title("Pacific Grace MB Church Vancouver"));
+
+        //West Coast Christian Fellowship
+        LatLng c4 = new LatLng(49.2698328,-123.047887);
+        mMap.addMarker(new MarkerOptions().position(c4).title("West Coast Christian Fellowship"));
+
+        //Broadway Church
+        LatLng c5 = new LatLng(49.2617278,-123.0489528);
+        mMap.addMarker(new MarkerOptions().position(c5).title("Broadway Church"));
+
+        //City Baptist Church
+        LatLng c6 = new LatLng(49.2813891,-123.0496031);
+        mMap.addMarker(new MarkerOptions().position(c6).title("City Baptist Church"));
+
+        //disable images on the map side for the church listing.
+        //add icon to map close thing
 
     }
 
