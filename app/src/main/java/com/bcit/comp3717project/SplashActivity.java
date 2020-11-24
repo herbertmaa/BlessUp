@@ -1,6 +1,5 @@
 package com.bcit.comp3717project;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-
-import model.Church;
 
 public class SplashActivity extends FireBaseActivity {
 
@@ -51,12 +42,25 @@ public class SplashActivity extends FireBaseActivity {
         companySlogan = findViewById(R.id.companySlogan);
         companySlogan.setAnimation(bottomAnim);
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            this.startActivity(intent);
-            finish(); // Remove this Activity from the Stack, as it should not be called again.
-        }, 3000);
     }
 
+    @Override
+    protected void onLogin() {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent i = new Intent(this, MainActivity.class); //TODO change this to something else, for now keep it going to Main for testing
+            startActivity(i);
+            finish(); // Remove this Activity from the Stack, as it should not be called again.
+        }, SPLASH_DELAY_TIME);
+
+    }
+
+    @Override
+    protected void onLogout() {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+            finish(); // Remove this Activity from the Stack, as it should not be called again.
+        }, SPLASH_DELAY_TIME);
+    }
 
 }

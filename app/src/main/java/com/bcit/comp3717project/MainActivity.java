@@ -1,9 +1,8 @@
 package com.bcit.comp3717project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,10 +20,10 @@ public class MainActivity extends FireBaseActivity {
         DatabaseReference myRef = database.getReference("message");
     }
 
-   public void onLoginClick(View view) {
-       Intent i = new Intent(this, LoginActivity.class);
-       startActivity(i);
-   }
+    public void onLoginClick(View view) {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
 
     public void onSelectReligionClick(View view) {
         Intent i = new Intent(this, ReligionSelectionActivity.class);
@@ -47,14 +46,14 @@ public class MainActivity extends FireBaseActivity {
         startActivity(i);
     }
 
-    public void onImageClick(View view) {
-        Intent i = new Intent(this, ImageActivity.class);
-        startActivity(i);
-    }
-
     public void onLogoutClick(View view) {
         auth.signOut();
         Toast t = Toast.makeText(this, "Logged user out", Toast.LENGTH_LONG);
         t.show();
+    }
+
+    @Override
+    protected void onLogin() {
+        
     }
 }

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,9 +33,14 @@ public class ChurchDetailActivity extends FireBaseActivity {
         displayChurchDetails();
     }
 
+    @Override
+    protected void onLogin() {
+
+    }
+
+
     private void displayChurchDetails() {
         Church church = (Church) getIntent().getExtras().get("church");
-
 
         if (church != null) {
             TextView church_name = findViewById(R.id.church_name);

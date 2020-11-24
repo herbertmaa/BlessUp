@@ -69,23 +69,33 @@ public class ChatActivity extends FireBaseActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 messagesList.add(dataSnapshot.getValue(ChatMessage.class));
                 adapter.notifyDataSetChanged();
-                lvChat.smoothScrollToPosition(adapter.getCount()-1);
+                lvChat.smoothScrollToPosition(adapter.getCount() - 1);
             }
+
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
             }
+
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
 
+    @Override
+    protected void onLogin() {
+
+    }
+
+    
     @Override
     protected void onStart() {
         super.onStart();
@@ -111,7 +121,7 @@ public class ChatActivity extends FireBaseActivity {
         setValueTask.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                Toast.makeText(ChatActivity.this,"Message Sent.",Toast.LENGTH_LONG).show();
+                Toast.makeText(ChatActivity.this, "Message Sent.", Toast.LENGTH_LONG).show();
                 editTextMessage.setText("");
             }
         });
