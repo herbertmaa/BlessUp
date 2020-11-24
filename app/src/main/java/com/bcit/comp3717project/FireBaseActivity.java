@@ -14,8 +14,6 @@ public abstract class FireBaseActivity extends AppCompatActivity implements Fire
 
     public static String TAG = "FireBaseActivity";
     protected FirebaseAuth auth = FirebaseAuth.getInstance();
-    private boolean authLoginFlag = false;
-    private boolean authLogoutFlag = false;
 
     //Override this method in your Activity and call super.onCreate(savedInstanceState)
     @Override
