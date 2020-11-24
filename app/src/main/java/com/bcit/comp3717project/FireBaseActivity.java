@@ -3,7 +3,6 @@ package com.bcit.comp3717project;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,12 +32,21 @@ public class FireBaseActivity extends AppCompatActivity {
             if (user != null) {
                 // User is signed in
                 Log.e(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                onLogin();
             } else {
                 // User is signed out
                 Log.e(TAG, "onAuthStateChanged:signed_out");
+                onLogout();
             }
         });
     }
 
 
+    protected void onLogin(){
+
+    }
+
+    protected void onLogout(){
+
+    }
 }

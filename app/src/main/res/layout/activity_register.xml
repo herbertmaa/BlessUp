@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <TextView
-        android:id="@+id/loginText"
-        android:layout_width="342dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:fontFamily="@font/indigo_daisy"
-        android:text="@string/action_register"
-        android:textSize="75sp"
-        app:layout_constraintBottom_toTopOf="@+id/loginTextBlurb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/loginTextBlurb"
-        android:layout_width="344dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/loginTextBlurb"
-        android:textSize="16sp"
-        android:paddingLeft="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -46,6 +21,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.583">
 
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/indigo_daisy"
+            android:text="@string/action_register"
+            android:textSize="75sp"
+            app:layout_constraintBottom_toTopOf="@+id/loginTextBlurb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/loginTextBlurb"
+            android:layout_width="344dp"
+            android:layout_height="61dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="10dp"
+            android:text="@string/loginTextBlurb"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/FullName"
@@ -68,21 +69,6 @@
             android:inputType="textEmailAddress"
             android:paddingLeft="15dp"
             android:textColor="@color/editTextColor" />
-
-        <!--        <TextView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:ems="10"-->
-        <!--            android:text="@string/DateOfBirth"-->
-        <!--            android:textSize="18dp"-->
-        <!--            android:paddingLeft="15dp"/>-->
-
-        <!--        <DatePicker-->
-        <!--            android:id="@+id/UserDateOfBirth"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:datePickerMode="spinner"-->
-        <!--            android:calendarViewShown="false"/>-->
 
         <EditText
             android:id="@+id/emailPasswordTextField"
@@ -113,6 +99,12 @@
             android:layout_height="50dp"
             android:onClick="register"
             android:text="@string/action_register" />
+
+        <TextView
+            android:id="@+id/loginRedirectText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/loginRedirectText" />
 
     </LinearLayout>
 

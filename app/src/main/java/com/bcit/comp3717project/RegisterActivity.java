@@ -2,22 +2,24 @@ package com.bcit.comp3717project;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.Log;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
 
 import model.User;
 
@@ -29,7 +31,6 @@ public class RegisterActivity extends FireBaseActivity {
     //widgets and firebaseauth
     EditText FullName, UserEmail, Password, PasswordConfirm;
     Button Register;
-    DatePicker dp;
 
 
     @Override
@@ -45,13 +46,7 @@ public class RegisterActivity extends FireBaseActivity {
         Password = findViewById(R.id.emailPasswordTextField);
         PasswordConfirm = findViewById(R.id.rePassword);
 
-
-        //add back once login button is implemented.
-//        if(fAuth.getCurrentUser() != null) {
-//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//            finish();
-//        }
-
+        makeLinks();
     }
 
     public void register(View view) {
@@ -114,4 +109,26 @@ public class RegisterActivity extends FireBaseActivity {
                 .build();
         user.updateProfile(profileUpdates);
     }
+    private void makeLinks() {
+
+        SpannableString string = new SpannableString(getResources().getString(R.string.loginRedirectText));
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+
+            }
+        };
+
+        string.setSpan(clickableSpan, 25, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView t = findViewById(R.id.loginRedirectText);
+        t.setText(string);
+        t.setMovementMethod(LinkMovementMethod.getInstance());
+        t.setHighlightColor(Color.TRANSPARENT);
+    }
+
 }

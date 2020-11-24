@@ -1,7 +1,5 @@
 package com.bcit.comp3717project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -44,11 +42,6 @@ public class MainActivity extends FireBaseActivity {
 
     public void onSelectChurchesPageViewClick(View view) {
         Intent i = new Intent(this, ViewChurchesActivity.class);
-        startActivity(i);
-    }
-
-    public void onImageClick(View view) {
-        Intent i = new Intent(this, ImageActivity.class);
         startActivity(i);
     }
 

@@ -1,17 +1,12 @@
 package com.bcit.comp3717project;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import model.Church;
@@ -49,28 +44,17 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ChurchAdapter.ViewHolder holder, int position) {
         final CardView cardView = holder.cardView;
 
-        //TODO add images to church adapter
-//        ImageView imageView = cardView.findViewById(R.id.item_image);
-//        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(),
-//                imageIds[position]);
-//        imageView.setImageDrawable(drawable);
-//        imageView.setContentDescription(captions[position]);
-
         TextView churchName = cardView.findViewById(R.id.church_name);
         churchName.setText(churches[position].getName());
-
 
         TextView churchDescription = cardView.findViewById(R.id.church_description);
         churchDescription.setText(churches[position].getDescription());
 
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(cardView.getContext(), ChurchDetailActivity.class);
-                i.putExtra("church", churches[position]);
-                cardView.getContext().startActivity(i);
-            }
+        cardView.setOnClickListener(v -> {
+            Intent i = new Intent(cardView.getContext(), ChurchDetailActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            i.putExtra("church", churches[position]);
+            cardView.getContext().startActivity(i);
         });
     }
 

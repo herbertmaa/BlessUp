@@ -2,11 +2,18 @@ package com.bcit.comp3717project;
 
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +34,7 @@ public class LoginActivity extends FireBaseActivity {
         setContentView(R.layout.activity_login);
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        makeLinks();
     }
 
     public void logIn(View view) {
@@ -34,7 +42,7 @@ public class LoginActivity extends FireBaseActivity {
         EditText email = findViewById(R.id.emailTextField);
         EditText password = findViewById(R.id.emailPasswordTextField);
 
-        if(!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()){
+        if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
             auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -60,11 +68,26 @@ public class LoginActivity extends FireBaseActivity {
         }
     }
 
-    @Override
-    public void updateUI(FirebaseUser user){
+    private void makeLinks() {
 
-        //TODO update logic to display changes
-        //Log.e(TAG, user.toString());
+        SpannableString string = new SpannableString(getResources().getString(R.string.registerRedirectText));
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+
+            }
+        };
+
+        string.setSpan(clickableSpan, 23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView t = findViewById(R.id.registerRedirectText);
+        t.setText(string);
+        t.setMovementMethod(LinkMovementMethod.getInstance());
+        t.setHighlightColor(Color.TRANSPARENT);
     }
 
 }

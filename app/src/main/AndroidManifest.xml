@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,13 +26,16 @@
 
         <activity android:name=".ViewChurchesActivity" />
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".ChatActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ReligionSelectionActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ImageActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity android:name=".ChurchDetailActivity" />
     </application>
 
