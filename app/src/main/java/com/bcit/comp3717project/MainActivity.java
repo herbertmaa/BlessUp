@@ -2,6 +2,7 @@ package com.bcit.comp3717project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,11 +18,6 @@ public class MainActivity extends FireBaseActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
-    }
-
-    @Override
-    protected void onLogin() {
-
     }
 
     public void onLoginClick(View view) {
@@ -54,5 +50,10 @@ public class MainActivity extends FireBaseActivity {
         auth.signOut();
         Toast t = Toast.makeText(this, "Logged user out", Toast.LENGTH_LONG);
         t.show();
+    }
+
+    @Override
+    protected void onLogin() {
+        
     }
 }
