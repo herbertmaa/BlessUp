@@ -30,22 +30,8 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
         this.messageList = messageList;
     }
 
-    public ChatListAdapter(Context context, int resource, List<ChatMessage> objects, Activity context1, List<ChatMessage> messageList) {
-        super(context, resource, objects);
-        this.context = context1;
-        this.messageList = messageList;
-    }
-
     public int getCount() {
         return messageList.size();
-    }
-
-    public ChatMessage getChatMessageItem(int i) {
-        return messageList.get(i);
-    }
-
-    public long getChatMessageItemId(int i) {
-        return i;
     }
 
     @NonNull
