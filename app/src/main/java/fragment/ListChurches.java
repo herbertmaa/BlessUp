@@ -66,7 +66,7 @@ public class ListChurches extends Fragment {
                     churches.add(church);
                 }
                 Church[] church_array = churches.toArray(new Church[churches.size()]);
-                ChurchAdapter adapter = new ChurchAdapter(church_array);
+                ChurchAdapter adapter = new ChurchAdapter(church_array, true);
                 listRecycler.setAdapter(adapter);
             }
 

@@ -71,7 +71,7 @@ public class ListChurches extends Fragment {
         });
 
         Church[] church_array = churches.toArray(new Church[churches.size()]);
-        ChurchAdapter adapter = new ChurchAdapter(church_array);
+        ChurchAdapter adapter = new ChurchAdapter(church_array, true);
 
         mapRecycler.setAdapter(adapter);
         GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 2);

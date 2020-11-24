@@ -106,7 +106,7 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
 
 
         Church[] church_array = churches.toArray(new Church[churches.size()]);
-        ChurchAdapter adapter = new ChurchAdapter(church_array); ///TODO add images?
+        ChurchAdapter adapter = new ChurchAdapter(church_array, false); ///TODO add images?
 
         mapRecycler.setAdapter(adapter);
 
@@ -118,8 +118,8 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        float zoomLevel = 16.0f;
-        LatLng vancouver = new LatLng(49.2827, -123.1207);
+        float zoomLevel = 18.0f;
+        LatLng vancouver = new LatLng(49.2526718,-123.0659625);
         mMap.addMarker(new MarkerOptions().position(vancouver).title("Marker in Vancouver"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vancouver, zoomLevel));
         mMap.setMinZoomPreference(6.0f);
