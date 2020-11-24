@@ -62,19 +62,13 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder
 
         Church currentChurch = churches[position];
 
-
         loadImageView(currentChurch.getImageURL(), currentChurch.getName(), cardView);
-
 
         TextView churchName = cardView.findViewById(R.id.church_name);
         churchName.setText(currentChurch.getName());
 
         TextView churchLocation = cardView.findViewById(R.id.church_location);
         churchLocation.setText(currentChurch.getAddress());
-
-        //TODO put this in the detail scription area
-//        TextView churchDescription = cardView.findViewById(R.id.church_description);
-//        churchDescription.setText(churches[position].getDescription());
 
 
         cardView.setOnClickListener(new View.OnClickListener() {

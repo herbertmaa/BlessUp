@@ -11,6 +11,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+
+import model.Church;
+
 public class SplashActivity extends FireBaseActivity {
 
     private static int SPLASH_DELAY_TIME = 3000;

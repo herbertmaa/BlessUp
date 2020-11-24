@@ -26,12 +26,30 @@
             android:scaleType="centerCrop" />
     </io.supercharge.shimmerlayout.ShimmerLayout>
 
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_gradient"
+        android:text="@string/join_church"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_add_24"
+        android:onClick="onJoinChurch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/materialCardView"
+        app:layout_constraintVertical_bias="0.8" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:focusable="true"
         android:scaleType="centerCrop"
+        app:cardElevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,22 +97,6 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-    <Button
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/green_gradient"
-        android:elevation="2dp"
-        android:text="Join Church"
-        app:backgroundTint="@null"
-        app:icon="@drawable/ic_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/materialCardView"
-        app:layout_constraintVertical_bias="0.8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
