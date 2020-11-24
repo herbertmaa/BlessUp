@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -15,16 +14,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import adapter.ChatListAdapter;
@@ -41,11 +38,9 @@ public class ChatActivity extends FireBaseActivity {
 
     ListView lvChat;
     List<ChatMessage> messagesList;
+    ChatListAdapter adapter;
 
-    FirebaseAuth mAuth;
     DatabaseReference chatCollection;
-
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +48,6 @@ public class ChatActivity extends FireBaseActivity {
         setContentView(R.layout.activity_chat);
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
-
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
         chatCollection = FirebaseDatabase.getInstance().getReference("chat");
@@ -67,28 +61,34 @@ public class ChatActivity extends FireBaseActivity {
 
         lvChat = (ListView) findViewById(R.id.lvChat);
         messagesList = new ArrayList<ChatMessage>();
+        adapter = new ChatListAdapter(ChatActivity.this, messagesList);
+        lvChat.setAdapter(adapter);
+
+        chatCollection.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                messagesList.add(dataSnapshot.getValue(ChatMessage.class));
+                adapter.notifyDataSetChanged();
+                lvChat.smoothScrollToPosition(adapter.getCount()-1);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        chatCollection.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                messagesList.clear();
-                for (DataSnapshot toDoItemSnapshot : dataSnapshot.getChildren()) {
-                    ChatMessage chatMessage = toDoItemSnapshot.getValue(ChatMessage.class);
-                    messagesList.add(chatMessage);
-                }
-
-                ChatListAdapter adapter = new ChatListAdapter(ChatActivity.this, messagesList);
-                lvChat.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
     }
 
     private void sendMessage() {

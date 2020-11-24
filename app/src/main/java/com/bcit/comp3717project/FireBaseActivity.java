@@ -17,7 +17,7 @@ public class FireBaseActivity extends AppCompatActivity {
     protected FirebaseUser currentUser = null;
 
     //Override this method in your Activity
-    public void updateUI(FirebaseUser user){
+    public void updateUI(FirebaseUser user) {
         Log.e(TAG, user.toString());
     }
 
@@ -28,18 +28,16 @@ public class FireBaseActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        FirebaseAuth.AuthStateListener mAuthListener = firebaseAuth -> {
+        auth.addAuthStateListener(firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
                 // User is signed in
-                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                Log.e(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
             } else {
                 // User is signed out
-                Log.d(TAG, "onAuthStateChanged:signed_out");
+                Log.e(TAG, "onAuthStateChanged:signed_out");
             }
-            // ...
-        };
-
+        });
     }
 
 

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bcit.comp3717project.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Date;
 import java.util.List;
@@ -54,7 +56,7 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
         ChatMessage chatMessage = messageList.get(position);
         View listViewItem;
 
-        if (chatMessage.isBelongsToCurrentUser()) {
+        if (belongsToCurrentUser(chatMessage)) {
             listViewItem = inflater.inflate(R.layout.my_message, null, true);
         } else {
             listViewItem = inflater.inflate(R.layout.their_message, null, true);
@@ -75,5 +77,11 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
         String delegate = "hh:mm aaa";
         String formattedTime = (String) DateFormat.format(delegate, date);
         return formattedTime.charAt(0) == '0' ? formattedTime.substring(1) : formattedTime;
+    }
+
+    public boolean belongsToCurrentUser(ChatMessage chatMessage) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        return chatMessage.getCreatedBy().getId().equals(firebaseUser.getUid());
     }
 }

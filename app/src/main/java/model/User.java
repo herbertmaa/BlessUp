@@ -2,10 +2,11 @@ package model;
 
 import android.location.Location;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
 
     private String userID = null;
     private String password = null;
@@ -15,8 +16,8 @@ public class User {
     private String emailAddress = null;
     private Location address = null;
     private Church church = null;
-    private Date joinDate = null;
-    private Date lastActive = null;
+    private String joinDate = null;
+    private String lastActive = null;
     private String gender = null;
     private String religion = null;
     private String userType = null;
@@ -33,7 +34,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
-        this.joinDate = Calendar.getInstance().getTime();
+        this.joinDate = Calendar.getInstance().getTime().toString();
         this.userType = "MEMBER";
         this.lastActive = joinDate;
         this.religion = "NONE";
@@ -94,19 +95,19 @@ public class User {
         this.church = church;
     }
 
-    public Date getJoinDate() {
+    public String getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(Date joinDate) {
+    public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
     }
 
-    public Date getLastActive() {
+    public String getLastActive() {
         return lastActive;
     }
 
-    public void setLastActive(Date lastActive) {
+    public void setLastActive(String lastActive) {
         this.lastActive = lastActive;
     }
 
@@ -140,6 +141,10 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 }
 

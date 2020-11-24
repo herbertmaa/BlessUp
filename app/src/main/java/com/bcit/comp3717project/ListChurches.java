@@ -1,4 +1,4 @@
-package fragment;
+package com.bcit.comp3717project;
 
 import android.os.Bundle;
 
@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bcit.comp3717project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,23 +51,17 @@ public class ListChurches extends Fragment {
     }
 
     private void initRecyclerView(String name) {
-        RecyclerView listRecycler = getView().findViewById(R.id.recyclerView);
-
-        GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 1);
-        listRecycler.setLayoutManager(lm);
+        RecyclerView mapRecycler = getView().findViewById(R.id.recyclerView);
 
         ArrayList<Church> churches = new ArrayList<>();
         DatabaseReference churchesReference = FirebaseDatabase.getInstance().getReference("churches");
         churchesReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot churchSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot churchSnapshot: snapshot.getChildren()) {
                     Church church = churchSnapshot.getValue(Church.class);
                     churches.add(church);
                 }
-                Church[] church_array = churches.toArray(new Church[churches.size()]);
-                ChurchAdapter adapter = new ChurchAdapter(church_array);
-                listRecycler.setAdapter(adapter);
             }
 
             @Override
@@ -76,7 +70,11 @@ public class ListChurches extends Fragment {
             }
         });
 
+        Church[] church_array = churches.toArray(new Church[churches.size()]);
+        ChurchAdapter adapter = new ChurchAdapter(church_array);
 
-
+        mapRecycler.setAdapter(adapter);
+        GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 2);
+        mapRecycler.setLayoutManager(lm);
     }
 }
