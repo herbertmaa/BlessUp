@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="2dp"
-    android:paddingLeft="10dp"
     android:paddingRight="60dp"
     android:clipToPadding="false"
     android:layout_margin="10dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -54,7 +53,7 @@
             android:paddingLeft="40dp"
             android:text="12:00 AM"
             android:textAlignment="viewEnd"
-            android:textColor="@color/chatTheirTimeStamp1"
+            android:textColor="@color/chatTheirTimeStamp"
             android:textStyle="italic"
             tools:ignore="RtlCompat" />
     </RelativeLayout>

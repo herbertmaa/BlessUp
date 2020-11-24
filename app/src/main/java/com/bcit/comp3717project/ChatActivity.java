@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +37,7 @@ public class ChatActivity extends FireBaseActivity {
     SharedPreferences pref;
 
     private EditText editTextMessage;
-    private ImageButton buttonSendMessage;
+    private Button buttonSendMessage;
 
     ListView lvChat;
     List<ChatMessage> messagesList;
@@ -95,7 +98,7 @@ public class ChatActivity extends FireBaseActivity {
 
     }
 
-    
+
     @Override
     protected void onStart() {
         super.onStart();
