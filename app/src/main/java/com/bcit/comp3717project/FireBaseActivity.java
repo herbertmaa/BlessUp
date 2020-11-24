@@ -1,5 +1,6 @@
 package com.bcit.comp3717project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -8,17 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class FireBaseActivity extends AppCompatActivity {
+public abstract class FireBaseActivity extends AppCompatActivity {
 
     public static String TAG = "FireBaseActivity";
 
     protected FirebaseAuth auth = FirebaseAuth.getInstance();
     protected FirebaseUser currentUser = null;
-
-    //Override this method in your Activity
-    public void updateUI(FirebaseUser user) {
-        Log.e(TAG, user.toString());
-    }
 
 
     //Override this method in your Activity and call super.onCreate(savedInstanceState)
@@ -42,11 +38,11 @@ public class FireBaseActivity extends AppCompatActivity {
     }
 
 
-    protected void onLogin(){
-
-    }
-
+    protected abstract void onLogin();
     protected void onLogout(){
-
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+        finish();
     }
 }

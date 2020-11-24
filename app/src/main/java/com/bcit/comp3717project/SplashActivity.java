@@ -61,8 +61,6 @@ public class SplashActivity extends FireBaseActivity {
             startActivity(i);
             finish(); // Remove this Activity from the Stack, as it should not be called again.
         }, SPLASH_DELAY_TIME);
-
-
     }
 
 }

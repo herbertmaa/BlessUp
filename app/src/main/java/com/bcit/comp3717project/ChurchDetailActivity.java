@@ -33,6 +33,12 @@ public class ChurchDetailActivity extends FireBaseActivity {
         displayChurchDetails();
     }
 
+    @Override
+    protected void onLogin() {
+
+    }
+
+
     private void displayChurchDetails() {
         Church church = (Church) getIntent().getExtras().get("church");
 

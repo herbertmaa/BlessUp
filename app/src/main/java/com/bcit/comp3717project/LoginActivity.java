@@ -30,18 +30,14 @@ public class LoginActivity extends FireBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Log.v(TAG, "Displaying main activity contents");
         setContentView(R.layout.activity_login);
-
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         makeLinks();
     }
 
     public void logIn(View view) {
-
         EditText email = findViewById(R.id.emailTextField);
         EditText password = findViewById(R.id.emailPasswordTextField);
-
         if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
             auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -50,7 +46,7 @@ public class LoginActivity extends FireBaseActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = auth.getCurrentUser();
-                        updateUI(user);
+                        onLogin();
 
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("email", email.getText().toString());
@@ -60,7 +56,6 @@ public class LoginActivity extends FireBaseActivity {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        updateUI(null);
                     }
                 }
             });
@@ -90,4 +85,16 @@ public class LoginActivity extends FireBaseActivity {
         t.setHighlightColor(Color.TRANSPARENT);
     }
 
+
+    @Override
+    protected void onLogin(){
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class); //TODO change this to an appropriate activity
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onLogout() {
+
+    }
 }

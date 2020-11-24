@@ -87,6 +87,7 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder
             public void onClick(View v) {
                 Intent i = new Intent(cardView.getContext(), ChurchDetailActivity.class);
                 i.putExtra("church", currentChurch);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 cardView.getContext().startActivity(i);
             }
         });

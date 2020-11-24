@@ -70,6 +70,11 @@ public class ReligionSelectionActivity extends FireBaseActivity {
 
     }
 
+    @Override
+    protected void onLogin() {
+
+    }
+
     public void onConfirmClick(View view) {
         FirebaseUser firebaseUser = auth.getCurrentUser();
         String userID = firebaseUser.getUid();

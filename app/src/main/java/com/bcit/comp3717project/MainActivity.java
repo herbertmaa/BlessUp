@@ -19,10 +19,15 @@ public class MainActivity extends FireBaseActivity {
         DatabaseReference myRef = database.getReference("message");
     }
 
-   public void onLoginClick(View view) {
-       Intent i = new Intent(this, LoginActivity.class);
-       startActivity(i);
-   }
+    @Override
+    protected void onLogin() {
+
+    }
+
+    public void onLoginClick(View view) {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
 
     public void onSelectReligionClick(View view) {
         Intent i = new Intent(this, ReligionSelectionActivity.class);

@@ -49,6 +49,16 @@ public class RegisterActivity extends FireBaseActivity {
         makeLinks();
     }
 
+    @Override
+    protected void onLogin() {
+
+    }
+
+    @Override
+    protected void onLogout() {
+
+    }
+
     public void register(View view) {
 
         String fullName = FullName.getText().toString().trim();

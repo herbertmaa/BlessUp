@@ -8,30 +8,30 @@
         android:id="@+id/LoginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Check out the login page here!"
-        android:onClick="onLoginClick" />
+        android:onClick="onLoginClick"
+        android:text="Check out the login page here!" />
 
     <Button
         android:id="@+id/SelectReligionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose your religion!"
-        android:onClick="onSelectReligionClick" />
+        android:onClick="onSelectReligionClick"
+        android:text="Choose your religion!" />
 
     <Button
         android:id="@+id/SelectChatButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onSelectChatClick"
-        android:text="Check out the chat layout"/>
+        android:text="Check out the chat layout" />
 
 
     <Button
         android:id="@+id/SelectRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:onClick="onSelectRegisterClick"/>
+        android:onClick="onSelectRegisterClick"
+        android:text="Register" />
 
     <Button
         android:id="@+id/SelectChurchesPageView"
@@ -41,17 +41,9 @@
         android:text="View Churches Activity" />
 
     <Button
-        android:id="@+id/SelectImageButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onImageClick"
-        android:text="Test Image Retrival Activity" />
-
-    <Button
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:onClick="onLogoutClick">
-    </Button>
+        android:onClick="onLogoutClick"
+        android:text="Logout"></Button>
 </LinearLayout>
