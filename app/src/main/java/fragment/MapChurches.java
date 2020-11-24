@@ -106,7 +106,7 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
 
 
         Church[] church_array = churches.toArray(new Church[churches.size()]);
-        ChurchAdapter adapter = new ChurchAdapter(church_array, false); ///TODO add images?
+        ChurchAdapter adapter = new ChurchAdapter(church_array, false);
 
         mapRecycler.setAdapter(adapter);
 
