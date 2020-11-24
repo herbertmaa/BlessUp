@@ -30,6 +30,7 @@ import model.Church;
 public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder> {
 
     private Church[] churches;
+    private boolean loadImages;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
@@ -40,8 +41,10 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder
         }
     }
 
-    public ChurchAdapter(Church[] churches) {
+    public ChurchAdapter(Church[] churches, boolean loadImages)
+    {
         this.churches = churches;
+        this.loadImages = loadImages;
     }
 
     @NonNull
@@ -62,19 +65,21 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder
 
         Church currentChurch = churches[position];
 
-
-        loadImageView(currentChurch.getImageURL(), currentChurch.getName(), cardView);
-
+        if(loadImages) {
+            loadImageView(currentChurch.getImageURL(), currentChurch.getName(), cardView);
+        }
+        else{
+            View  imgView = cardView.findViewById(R.id.item_image);
+            View shimmer = cardView.findViewById(R.id.shimmer_wrapper);
+            shimmer.setVisibility(View.GONE);
+            imgView.setVisibility(View.GONE);
+        }
 
         TextView churchName = cardView.findViewById(R.id.church_name);
         churchName.setText(currentChurch.getName());
 
         TextView churchLocation = cardView.findViewById(R.id.church_location);
         churchLocation.setText(currentChurch.getAddress());
-
-        //TODO put this in the detail scription area
-//        TextView churchDescription = cardView.findViewById(R.id.church_description);
-//        churchDescription.setText(churches[position].getDescription());
 
 
         cardView.setOnClickListener(new View.OnClickListener() {

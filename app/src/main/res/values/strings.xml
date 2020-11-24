@@ -18,8 +18,10 @@
     <string name="prompt_repassword">Re-Type Password</string>
     <string name="loginTextBlurb">Join Bless Up today to connect with your congregation and others</string>
     <string name="loginButtonText"> Login </string>
+    <string name="churchListingExpand"> Expand Church List </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="church_image">Failed to load church image</string>
+    <string name="join_church">Join Church</string>
 </resources>

@@ -1,9 +1,11 @@
 package model;
 
 import android.location.Location;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Church implements Serializable {
 
@@ -14,7 +16,7 @@ public class Church implements Serializable {
     private String religion;
     private String description;
     private String imageURL;
-    private ArrayList<User> members;
+    private HashMap<String, User> members;
 
     public String getImageURL() {
         return imageURL;
@@ -24,14 +26,15 @@ public class Church implements Serializable {
         this.imageURL = imageURL;
     }
 
-    public Church(String churchID, String name, String address, String phoneNumber, String religion, String description, ArrayList<User> members) {
+    private Church() {}
+    public Church(String churchID, String name, String address, String phoneNumber, String religion, String description) {
         this.churchID = churchID;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.religion = religion;
         this.description = description;
-        this.members = members;
+        this.members = new HashMap<>();
         this.imageURL = null;
     }
 
@@ -83,11 +86,20 @@ public class Church implements Serializable {
         this.description = description;
     }
 
-    public ArrayList<User> getMembers() {
+    public HashMap<String,User> getMembers() {
         return members;
     }
 
-    public void setMembers(ArrayList<User> members) {
+    public void setMembers(HashMap<String, User> members) {
         this.members = members;
+    }
+
+    public void addUser(User user) {
+        if(members == null) {
+            members = new HashMap<String, User>();
+            members.put(user.getId(), user);
+        }else{
+            members.put(user.getId(), user);
+        }
     }
 }
