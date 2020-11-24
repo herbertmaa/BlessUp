@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context="fragment.ListChurches">
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/lv_chat_channel"
-        android:divider="@null"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+
 </LinearLayout>

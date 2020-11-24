@@ -39,7 +39,7 @@ public class ListChurches extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.chat_channel_list_layout, container, false);
+        return inflater.inflate(R.layout.fragment_list_churches, container, false);
 
     }
 
