@@ -5,9 +5,11 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="backgroundWhite">#FAFAFA</color>
 
+
     <!--Chat Threads-->
     <color name="editTextColor">#808080</color>
-    <color name="chatMessageBody">#fff</color>
+    <color name="chatMessageBody">#303030</color>
+    <color name= "chatMyMessageBackground"> #fffcf4 </color>
     <color name="chatMyMessage">#128C7E</color>
     <color name="chatTheirMessage">#075E54</color>
     <color name="chatMyTimeStamp">#666666</color>
