@@ -149,9 +149,6 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
         LatLng c6 = new LatLng(49.2813891,-123.0496031);
         mMap.addMarker(new MarkerOptions().position(c6).title("City Baptist Church"));
 
-        //disable images on the map side for the church listing.
-        //add icon to map close thing
-
     }
 
     private void initViews(View view) {
