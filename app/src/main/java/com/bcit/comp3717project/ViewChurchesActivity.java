@@ -63,6 +63,5 @@ public class ViewChurchesActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new ListChurches(), "List");
         pagerAdapter.addFragment(new MapChurches(), "Map");
         pager.setAdapter(pagerAdapter);
-
     }
 }

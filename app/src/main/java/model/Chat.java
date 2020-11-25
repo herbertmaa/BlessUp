@@ -3,18 +3,24 @@ package model;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Chat {
 
     private String chatID;
-    private ArrayList<User> members;
-    private ArrayList<Church> churches;
-    private User createdBy;
-    private Calendar createdAt;
-    private User modifiedBy;
-    private Calendar modifiedAt;
+    private Date createdAt;
+    private Date lastMessageDate;
+    private User lastModifiedBy;
     private Blob media;
     private ArrayList<ChatMessage> pinnedItems;
+    private Church church;
+
+    public Chat(String chatID, Church church) {
+        this.chatID = chatID;
+        this.church = church;
+        this.createdAt = Calendar.getInstance().getTime();
+    }
 
     public String getChatID() {
         return chatID;
@@ -24,52 +30,32 @@ public class Chat {
         this.chatID = chatID;
     }
 
-    public ArrayList<User> getMembers() {
-        return members;
+    public HashMap<String, User> getMembers() {
+        return this.church.getMembers();
     }
 
-    public void setMembers(ArrayList<User> members) {
-        this.members = members;
-    }
-
-    public ArrayList<Church> getChurches() {
-        return churches;
-    }
-
-    public void setChurches(ArrayList<Church> churches) {
-        this.churches = churches;
-    }
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Calendar getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Calendar createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public User getModifiedBy() {
-        return modifiedBy;
+    public User getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public void setModifiedBy(User modifiedBy) {
-        this.modifiedBy = modifiedBy;
+    public void setLastModifiedBy(User lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Calendar getModifiedAt() {
-        return modifiedAt;
+    public Date getModifiedAt() {
+        return lastMessageDate;
     }
 
-    public void setModifiedAt(Calendar modifiedAt) {
-        this.modifiedAt = modifiedAt;
+    public void setLastMessageDate(Date lastMessageDate) {
+        this.lastMessageDate = lastMessageDate;
     }
 
     public Blob getMedia() {

@@ -19,13 +19,6 @@
         android:text="Choose your religion!" />
 
     <Button
-        android:id="@+id/SelectChatButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onSelectChatClick"
-        android:text="Check out the chat layout" />
-
-    <Button
         android:id="@+id/SelectChatChannelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

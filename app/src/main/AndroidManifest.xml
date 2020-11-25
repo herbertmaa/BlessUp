@@ -32,7 +32,8 @@
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+
         <activity android:name=".ChatChannelActivity" />
         <activity android:name=".ReligionSelectionActivity" />
         <activity

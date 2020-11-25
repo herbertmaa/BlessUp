@@ -1,22 +1,32 @@
 package adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.bcit.comp3717project.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import model.Church;
+import model.User;
 
 
 public class ChatChannelAdapter extends ArrayAdapter<Church>{
@@ -45,10 +55,11 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         TextView churchAddressText = listViewItem.findViewById(R.id.church_address_channel);
         TextView chatDateText = listViewItem.findViewById(R.id.channel_chat_date_txt);
         TextView chatNotifsText = listViewItem.findViewById(R.id.chat_notifs_txt);
-        ImageView imageView = listViewItem.findViewById(R.id.church_icon_channel);
+        CircleImageView imageView = listViewItem.findViewById(R.id.church_icon_channel);
 
         churchNameText.setText(church.getName());
         churchAddressText.setText(church.getAddress());
+        loadImageView(church.getImageURL(), church.getName(), imageView);
 
         if(getRandomNumber()<2){
             chatDateText.setTextColor(context.getColor(R.color.channel_messageNotification));
@@ -65,6 +76,16 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         if(position==5){
             churchAddressText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_photo_camera, 0, 0, 0);
         }
+
+        // Check if Current User is Member of Church, Set Invisible if Not.
+        HashMap<String, User> churchMembers = church.getMembers();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        if (!churchMembers.containsKey(auth.getCurrentUser().getUid())) {
+            System.out.println("NOT A MEMBER OF THIS CHURCH");
+            listViewItem.setVisibility(View.GONE);
+        }
+
         return listViewItem;
     }
 
@@ -80,7 +101,28 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
             return 2;
         }else
             return 3;
+    }
 
+    private void loadImageView(String url, String churchName, CircleImageView image) {
+        try {
+            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(url);
+            final File localFile = File.createTempFile(churchName, "png");
+            mStorageReference.getFile(localFile)
+                    .addOnSuccessListener(
+                            taskSnapshot -> {
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                Resources res = context.getResources();
+                                if (image != null) {
+                                    image.setImageDrawable(RoundedBitmapDrawableFactory.create(res, bitmap));
+                                }
+                            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getLastChatMessageBody() {
+        //TODO
     }
 }
 

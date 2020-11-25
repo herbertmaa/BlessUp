@@ -7,18 +7,30 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import adapter.ChatChannelAdapter;
+import io.supercharge.shimmerlayout.ShimmerLayout;
+import model.Chat;
 import model.Church;
 
 public class ChatChannelActivity extends FireBaseActivity {
@@ -28,6 +40,8 @@ public class ChatChannelActivity extends FireBaseActivity {
     ListView lvChatChannels;
 
     DatabaseReference churchDBRef;
+
+    String chatID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +77,10 @@ public class ChatChannelActivity extends FireBaseActivity {
         lvChatChannels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Intent appInfo = new Intent(ChatChannelActivity.this, ChatActivity.class);
-                startActivity(appInfo);
+                Intent intent = new Intent(ChatChannelActivity.this, ChatActivity.class);
+                Church church = churchList.get(position);
+                intent.putExtra("churchID", church.getChurchID());
+                startActivity(intent);
             }
         });
     }
@@ -80,4 +96,30 @@ public class ChatChannelActivity extends FireBaseActivity {
     }
 
 }
-
+//    private DatabaseReference getParentReference(DataSnapshot snapshot) {
+//        DatabaseReference ref = snapshot.getRef();
+//        return ref.getParent();
+//    }
+//        chatReference.setValue(church[0]);
+//
+//        // Check if a chat exists for this church channel
+//        Query churchQuery = chatReference.orderByChild("churchID").equalTo(churchID);
+//        churchQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if(!dataSnapshot.exists()) {
+//                    // Create a new chat for this church
+//                    String chatID = chatReference.push().getKey();
+//                    Chat newChat = new Chat(chatID, church[0]);
+//                    chatReference.child(chatID).setValue(newChat);
+//                    channelReference = chatReference.child(chatID);
+//                } else {
+//                    channelReference = getParentReference(dataSnapshot);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.e(TAG, " Reading Chat/Creating Chat", databaseError.toException());
+//            }
+//        });
+//
