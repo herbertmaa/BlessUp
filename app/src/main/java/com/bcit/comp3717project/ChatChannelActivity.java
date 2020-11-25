@@ -47,7 +47,7 @@ public class ChatChannelActivity extends FireBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_channel_list_layout);
-
+        setTitle("Chats");
         churchDBRef = FirebaseDatabase.getInstance().getReference("churches");
         lvChatChannels = (ListView) findViewById(R.id.lv_chat_channel);
 

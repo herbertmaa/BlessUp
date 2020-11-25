@@ -8,15 +8,19 @@
     android:fillViewport="true"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarChat"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:navigationContentDescription="Navigation Description"
-        app:navigationIcon="@drawable/navigation_back">
+        android:id="@+id/appBarChat">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:navigationContentDescription="Navigation Description"
+            app:navigationIcon="@drawable/navigation_back">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/chatToolBarImage"
@@ -33,17 +37,20 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Church Name"
+            android:layout_toRightOf="@id/chatToolBarImage"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
-    </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:id="@+id/chatWrapper"
         android:layout_width="match_parent"
-        android:layout_height="590dp"
-        android:layout_below="@+id/toolbarChat"
-        android:layout_marginTop="5dp"
+        android:layout_height="611dp"
+        android:layout_below="@+id/appBarChat"
+        android:layout_marginTop="-16dp"
         android:fillViewport="true"
         android:fitsSystemWindows="true"
         android:scrollbars="vertical">
