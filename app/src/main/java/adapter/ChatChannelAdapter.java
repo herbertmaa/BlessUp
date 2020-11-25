@@ -1,16 +1,17 @@
 package adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.bcit.comp3717project.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import io.supercharge.shimmerlayout.ShimmerLayout;
+import de.hdodenhof.circleimageview.CircleImageView;
 import model.Church;
 import model.User;
 
@@ -54,7 +55,7 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         TextView churchAddressText = listViewItem.findViewById(R.id.church_address_channel);
         TextView chatDateText = listViewItem.findViewById(R.id.channel_chat_date_txt);
         TextView chatNotifsText = listViewItem.findViewById(R.id.chat_notifs_txt);
-        ImageView imageView = listViewItem.findViewById(R.id.church_icon_channel);
+        CircleImageView imageView = listViewItem.findViewById(R.id.church_icon_channel);
 
         churchNameText.setText(church.getName());
         churchAddressText.setText(church.getAddress());
@@ -102,7 +103,7 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
             return 3;
     }
 
-    private void loadImageView(String url, String churchName, ImageView v) {
+    private void loadImageView(String url, String churchName, CircleImageView image) {
         try {
             StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(url);
             final File localFile = File.createTempFile(churchName, "png");
@@ -110,9 +111,9 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
                     .addOnSuccessListener(
                             taskSnapshot -> {
                                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-
-                                if (v != null) {
-                                    v.setImageBitmap(bitmap);
+                                Resources res = context.getResources();
+                                if (image != null) {
+                                    image.setImageDrawable(RoundedBitmapDrawableFactory.create(res, bitmap));
                                 }
                             });
         } catch (Exception e) {

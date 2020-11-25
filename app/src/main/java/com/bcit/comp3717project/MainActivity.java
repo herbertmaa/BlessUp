@@ -30,11 +30,6 @@ public class MainActivity extends FireBaseActivity {
         startActivity(i);
     }
 
-    public void onSelectChatClick(View view) {
-        Intent i = new Intent(this, ChatActivity.class);
-        startActivity(i);
-    }
-
     public void onSelectChatChannelClick(View view) {
         Intent i = new Intent(this, ChatChannelActivity.class);
         startActivity(i);

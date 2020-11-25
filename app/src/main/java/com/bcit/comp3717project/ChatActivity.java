@@ -75,7 +75,7 @@ public class ChatActivity extends FireBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO remove action bar (DEBUG)
+        //TODO set navigation handler onclick back https://developer.android.com/reference/android/widget/Toolbar
         this.getSupportActionBar().hide();
         setContentView(R.layout.activity_chat);
 
@@ -85,6 +85,13 @@ public class ChatActivity extends FireBaseActivity {
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
         lvChat = (ListView) findViewById(R.id.lvChat);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         buttonSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
