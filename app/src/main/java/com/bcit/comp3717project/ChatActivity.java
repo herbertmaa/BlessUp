@@ -2,9 +2,11 @@ package com.bcit.comp3717project;
 
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -23,37 +25,41 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ChatListAdapter;
+import model.Chat;
 import model.ChatMessage;
+import model.Church;
 import model.User;
 
 public class ChatActivity extends FireBaseActivity {
 
     private static final String TAG = "ChatActivity";
-    SharedPreferences pref;
 
     private EditText editTextMessage;
     private Button buttonSendMessage;
 
     ListView lvChat;
-    List<ChatMessage> messagesList;
+    List<ChatMessage> messagesList = new ArrayList<ChatMessage>();
     ChatListAdapter adapter;
 
-    DatabaseReference chatCollection;
+    DatabaseReference chatReference;
+    DatabaseReference channelReference;
+    DatabaseReference churchReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        pref = getSharedPreferences("user_details", MODE_PRIVATE);
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
-        chatCollection = FirebaseDatabase.getInstance().getReference("chat");
+        lvChat = (ListView) findViewById(R.id.lvChat);
 
         buttonSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +68,30 @@ public class ChatActivity extends FireBaseActivity {
             }
         });
 
-        lvChat = (ListView) findViewById(R.id.lvChat);
-        messagesList = new ArrayList<ChatMessage>();
         adapter = new ChatListAdapter(ChatActivity.this, messagesList);
         lvChat.setAdapter(adapter);
 
-        chatCollection.addChildEventListener(new ChildEventListener() {
+        Intent intent = getIntent();
+        String churchID = intent.getStringExtra("churchID");
+
+        // Hydrate Church object that belongs to this chat
+        final Church[] church = new Church[1];
+        churchReference = FirebaseDatabase.getInstance().getReference("churches").child(churchID);
+        churchReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                church[0] = snapshot.getValue(Church.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "Hydrating Church (CHAT ACTIVITY)", databaseError.toException());
+            }
+        });
+
+        chatReference = FirebaseDatabase.getInstance().getReference("chat-" + churchID);
+
+        chatReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 messagesList.add(dataSnapshot.getValue(ChatMessage.class));
@@ -116,10 +140,10 @@ public class ChatActivity extends FireBaseActivity {
         String userUid = firebaseUser.getUid();
         User newUser = new User(userUid, firebaseUser.getDisplayName(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
 
-        String messageFireBaseID = chatCollection.push().getKey();
+        String messageFireBaseID = chatReference.push().getKey();
         ChatMessage chatMessage = new ChatMessage(messageFireBaseID, message, newUser);
 
-        Task setValueTask = chatCollection.child(messageFireBaseID).setValue(chatMessage);
+        Task setValueTask = chatReference.child(messageFireBaseID).setValue(chatMessage);
 
         setValueTask.addOnSuccessListener(new OnSuccessListener() {
             @Override
@@ -139,5 +163,33 @@ public class ChatActivity extends FireBaseActivity {
         });
     }
 
-
+    private DatabaseReference getParentReference(DataSnapshot snapshot) {
+        DatabaseReference ref = snapshot.getRef();
+        return ref.getParent();
+    }
 }
+
+//
+//        chatReference.setValue(church[0]);
+//
+//        // Check if a chat exists for this church channel
+//        Query churchQuery = chatReference.orderByChild("churchID").equalTo(churchID);
+//        churchQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if(!dataSnapshot.exists()) {
+//                    // Create a new chat for this church
+//                    String chatID = chatReference.push().getKey();
+//                    Chat newChat = new Chat(chatID, church[0]);
+//                    chatReference.child(chatID).setValue(newChat);
+//                    channelReference = chatReference.child(chatID);
+//                } else {
+//                    channelReference = getParentReference(dataSnapshot);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.e(TAG, " Reading Chat/Creating Chat", databaseError.toException());
+//            }
+//        });
+//

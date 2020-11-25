@@ -63,8 +63,10 @@ public class ChatChannelActivity extends FireBaseActivity {
         lvChatChannels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Intent appInfo = new Intent(ChatChannelActivity.this, ChatActivity.class);
-                startActivity(appInfo);
+                Intent intent = new Intent(ChatChannelActivity.this, ChatActivity.class);
+                Church church = churchList.get(position);
+                intent.putExtra("churchID", church.getChurchID());
+                startActivity(intent);
             }
         });
     }
