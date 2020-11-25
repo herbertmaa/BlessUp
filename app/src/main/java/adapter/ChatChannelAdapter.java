@@ -1,6 +1,8 @@
 package adapter;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,16 @@ import androidx.annotation.NonNull;
 
 import com.bcit.comp3717project.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import io.supercharge.shimmerlayout.ShimmerLayout;
 import model.Church;
 import model.User;
 
@@ -52,6 +58,7 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
 
         churchNameText.setText(church.getName());
         churchAddressText.setText(church.getAddress());
+        loadImageView(church.getImageURL(), church.getName(), imageView);
 
         if(getRandomNumber()<2){
             chatDateText.setTextColor(context.getColor(R.color.channel_messageNotification));
@@ -93,7 +100,28 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
             return 2;
         }else
             return 3;
+    }
 
+    private void loadImageView(String url, String churchName, ImageView v) {
+        try {
+            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(url);
+            final File localFile = File.createTempFile(churchName, "png");
+            mStorageReference.getFile(localFile)
+                    .addOnSuccessListener(
+                            taskSnapshot -> {
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+
+                                if (v != null) {
+                                    v.setImageBitmap(bitmap);
+                                }
+                            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getLastChatMessageBody() {
+        //TODO
     }
 }
 

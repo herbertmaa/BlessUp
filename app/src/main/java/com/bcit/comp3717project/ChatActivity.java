@@ -1,18 +1,29 @@
 package com.bcit.comp3717project;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.wear.widget.CircledImageView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,11 +38,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ChatListAdapter;
+import de.hdodenhof.circleimageview.CircleImageView;
 import model.Chat;
 import model.ChatMessage;
 import model.Church;
@@ -41,8 +56,11 @@ public class ChatActivity extends FireBaseActivity {
 
     private static final String TAG = "ChatActivity";
 
+    private Toolbar toolbar;
     private EditText editTextMessage;
     private Button buttonSendMessage;
+    private CircleImageView toolBarImage;
+    private TextView toolBarText;
 
     ListView lvChat;
     List<ChatMessage> messagesList = new ArrayList<ChatMessage>();
@@ -52,11 +70,18 @@ public class ChatActivity extends FireBaseActivity {
     DatabaseReference channelReference;
     DatabaseReference churchReference;
 
+    Church church;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO remove action bar (DEBUG)
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_chat);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbarChat);
+        toolBarImage = findViewById(R.id.chatToolBarImage);
+        toolBarText = findViewById(R.id.chatToolBarText);
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
         lvChat = (ListView) findViewById(R.id.lvChat);
@@ -74,13 +99,13 @@ public class ChatActivity extends FireBaseActivity {
         Intent intent = getIntent();
         String churchID = intent.getStringExtra("churchID");
 
-        // Hydrate Church object that belongs to this chat
-        final Church[] church = new Church[1];
-        churchReference = FirebaseDatabase.getInstance().getReference("churches").child(churchID);
+        churchReference = FirebaseDatabase.getInstance().getReference("churches/"+ churchID);
         churchReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                church[0] = snapshot.getValue(Church.class);
+                church = snapshot.getValue(Church.class);
+                loadToolbarImage(church.getImageURL(), church.getName(), toolBarImage);
+                toolBarText.setText(church.getName());
             }
 
             @Override
@@ -163,33 +188,22 @@ public class ChatActivity extends FireBaseActivity {
         });
     }
 
-    private DatabaseReference getParentReference(DataSnapshot snapshot) {
-        DatabaseReference ref = snapshot.getRef();
-        return ref.getParent();
+    @SuppressLint("RestrictedApi")
+    private void loadToolbarImage(String url, String churchName, CircleImageView image) {
+        try {
+            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(url);
+            final File localFile = File.createTempFile(churchName, "png");
+            mStorageReference.getFile(localFile)
+                    .addOnSuccessListener(
+                            taskSnapshot -> {
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                Resources res = getResources();
+                                if (image != null) {
+                                    image.setImageDrawable(RoundedBitmapDrawableFactory.create(res, bitmap));
+                                }
+                            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-
-//
-//        chatReference.setValue(church[0]);
-//
-//        // Check if a chat exists for this church channel
-//        Query churchQuery = chatReference.orderByChild("churchID").equalTo(churchID);
-//        churchQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if(!dataSnapshot.exists()) {
-//                    // Create a new chat for this church
-//                    String chatID = chatReference.push().getKey();
-//                    Chat newChat = new Chat(chatID, church[0]);
-//                    chatReference.child(chatID).setValue(newChat);
-//                    channelReference = chatReference.child(chatID);
-//                } else {
-//                    channelReference = getParentReference(dataSnapshot);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.e(TAG, " Reading Chat/Creating Chat", databaseError.toException());
-//            }
-//        });
-//

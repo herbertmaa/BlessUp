@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/chat_background"
     android:fillViewport="true"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:navigationContentDescription="Navigation Description"
+        app:navigationIcon="@drawable/navigation_back">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chatToolBarImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="55dp"
+            android:textAlignment="center"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/chatToolBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Church Name"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <ScrollView
         android:id="@+id/chatWrapper"
         android:layout_width="match_parent"
         android:layout_height="590dp"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbarChat"
+        android:layout_marginTop="5dp"
         android:fillViewport="true"
         android:fitsSystemWindows="true"
         android:scrollbars="vertical">
@@ -19,13 +51,14 @@
         <ListView
             android:id="@+id/lvChat"
             android:layout_width="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/toolbarChat"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="15dp"
             android:animationCache="true"
             android:divider="@color/backgroundWhite"
             android:scrollingCache="true"
-            android:smoothScrollbar="true"
-            android:layout_gravity="bottom"/>
+            android:smoothScrollbar="true" />
     </ScrollView>
 
     <LinearLayout

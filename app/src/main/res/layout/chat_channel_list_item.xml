@@ -11,7 +11,7 @@
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginEnd="6dp"
-        android:src="@drawable/church" />
+        android:src="@drawable/church"/>
 
     <TextView
         android:id="@+id/church_name_channel"
