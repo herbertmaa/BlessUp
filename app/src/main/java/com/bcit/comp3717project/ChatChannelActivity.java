@@ -1,6 +1,5 @@
 package com.bcit.comp3717project;
 
-
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,7 +22,6 @@ import model.Church;
 public class ChatChannelActivity extends FireBaseActivity {
 
     private Toolbar toolbar;
-    private TextView toolBarText;
 
     ArrayList<Church> churchList = new ArrayList<>();
     ChatChannelAdapter adapter;
