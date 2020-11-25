@@ -34,7 +34,7 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
     private List<Church> churchList;
 
     public ChatChannelAdapter(Activity context, ArrayList<Church> churchList) {
-        super(context, R.layout.activity_chat_channels, churchList);
+        super(context, R.layout.activity_chat_channel, churchList);
         this.context = context;
         this.churchList = churchList;
     }
