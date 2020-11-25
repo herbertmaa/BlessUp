@@ -1,39 +1,27 @@
 package com.bcit.comp3717project;
 
-
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import adapter.ChatChannelAdapter;
-import io.supercharge.shimmerlayout.ShimmerLayout;
-import model.Chat;
 import model.Church;
 
 public class ChatChannelActivity extends FireBaseActivity {
+
+    private Toolbar toolbar;
 
     ArrayList<Church> churchList = new ArrayList<>();
     ChatChannelAdapter adapter;
@@ -46,8 +34,16 @@ public class ChatChannelActivity extends FireBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_channel_list_layout);
+        this.getSupportActionBar().hide();
+        setContentView(R.layout.activity_chat_channel);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbarChatChannels);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         churchDBRef = FirebaseDatabase.getInstance().getReference("churches");
         lvChatChannels = (ListView) findViewById(R.id.lv_chat_channel);
 

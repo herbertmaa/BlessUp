@@ -27,4 +27,7 @@
     <string name="registerRedirectText">Don\'t have an account? Sign up</string>
     <string name="loginRedirectText">Already have an account? Sign In</string>
     <string name="chatMessagePrompt">Type Message</string>
+    <string name="chatChannelsText">Chats</string>
+    <string name="tvNotAMember">Join a church to start talking</string>
+    <string name="viewChurches">view churches</string>
 </resources>

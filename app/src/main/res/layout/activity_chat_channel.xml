@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fragment.ListChurches"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarChatChannels">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarChatChannels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:navigationContentDescription="Navigation Description"
+            app:navigationIcon="@drawable/navigation_back">
+
+            <TextView
+                android:id="@+id/tvChatChannelsToolBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chatChannelsText"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lv_chat_channel"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
