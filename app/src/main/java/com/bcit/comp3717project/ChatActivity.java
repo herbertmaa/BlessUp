@@ -2,26 +2,18 @@ package com.bcit.comp3717project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-import androidx.wear.widget.CircledImageView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,14 +21,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -47,7 +37,6 @@ import java.util.List;
 
 import adapter.ChatListAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
-import model.Chat;
 import model.ChatMessage;
 import model.Church;
 import model.User;
@@ -67,7 +56,6 @@ public class ChatActivity extends FireBaseActivity {
     ChatListAdapter adapter;
 
     DatabaseReference chatReference;
-    DatabaseReference channelReference;
     DatabaseReference churchReference;
 
     Church church;
@@ -75,7 +63,6 @@ public class ChatActivity extends FireBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO set navigation handler onclick back https://developer.android.com/reference/android/widget/Toolbar
         this.getSupportActionBar().hide();
         setContentView(R.layout.activity_chat);
 
