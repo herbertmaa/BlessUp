@@ -70,6 +70,11 @@ public class MainActivity extends FireBaseActivity {
         startActivity(i);
     }
 
+    public void onAboutUsPageClick(View view) {
+        Intent i = new Intent(this, AboutUsActivity.class);
+        startActivity(i);
+    }
+
     public void onLogoutClick(View view) {
         auth.signOut();
         Toast t = Toast.makeText(this, "Logged user out", Toast.LENGTH_LONG);

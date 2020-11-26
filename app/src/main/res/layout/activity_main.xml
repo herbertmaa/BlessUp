@@ -24,7 +24,7 @@
             android:layout_gravity="left"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/indigo_daisy"
-            android:text="Welcome"
+            android:text="@string/welcome2"
             android:textSize="100sp" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginStart="50dp"
-            android:text="Welcome to Bless Up, were here to help you connect and grow with communities near you." />
+            android:text="@string/welcome_desc" />
 
         <Button
             android:id="@+id/SelectReligionButton"
@@ -47,7 +47,7 @@
             android:textColor="@color/backgroundWhite"
             android:textSize="15sp"
             app:backgroundTint="@color/colorPrimaryDark"
-            app:icon="@drawable/ic_emoji_24"
+            app:icon="@drawable/update_religion_icon"
             app:iconGravity="end"
             app:iconTint="@color/backgroundWhite" />
 
@@ -63,7 +63,7 @@
             android:textColor="@color/backgroundWhite"
             android:textSize="15sp"
             app:backgroundTint="@color/colorPrimaryDark"
-            app:icon="@drawable/ic_emoji_24"
+            app:icon="@drawable/chats_and_groups"
             app:iconGravity="end"
 
             app:iconTint="@color/backgroundWhite" />
@@ -80,7 +80,7 @@
             android:textColor="@color/backgroundWhite"
             android:textSize="15sp"
             app:backgroundTint="@color/colorPrimaryDark"
-            app:icon="@drawable/ic_emoji_24"
+            app:icon="@drawable/find_a_church"
             app:iconGravity="end"
             app:iconTint="@color/backgroundWhite" />
 
@@ -91,12 +91,12 @@
             android:layout_height="75dp"
             android:layout_gravity="left"
             android:layout_marginStart="50dp"
-            android:onClick="onLogoutClick"
-            android:text="About Us"
+            android:onClick="onAboutUsPageClick"
+            android:text="@string/about_us"
             android:textColor="@color/backgroundWhite"
             android:textSize="15sp"
             app:backgroundTint="@color/colorPrimaryDark"
-            app:icon="@drawable/ic_emoji_24"
+            app:icon="@drawable/about_us"
             app:iconGravity="end"
             app:iconTint="@color/backgroundWhite" />
 
@@ -108,11 +108,11 @@
             android:layout_gravity="left"
             android:layout_marginStart="50dp"
             android:onClick="onLogoutClick"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textColor="@color/backgroundWhite"
             android:textSize="15sp"
             app:backgroundTint="@color/colorPrimaryDark"
-            app:icon="@drawable/ic_emoji_24"
+            app:icon="@drawable/logout_icon"
             app:iconGravity="end"
             app:iconTint="@color/backgroundWhite" />
     </LinearLayout>
