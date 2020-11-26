@@ -39,7 +39,7 @@
         android:id="@+id/companySlogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lorem Ipsum Ipsum Ipsum"
+        android:text="@string/appGreeting"
         android:textAlignment="center"
         android:textColor="@color/backgroundWhite"
         android:textSize="17sp"
