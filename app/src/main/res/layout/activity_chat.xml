@@ -17,7 +17,7 @@
             android:id="@+id/toolbarChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:navigationContentDescription="Navigation Description"
             app:navigationIcon="@drawable/navigation_back">
@@ -113,6 +113,7 @@
             android:insetRight="0dp"
             android:insetBottom="0dp"
             app:cornerRadius="40dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:icon="@drawable/ic_send24"
             app:iconSize="24dp" />
     </LinearLayout>
