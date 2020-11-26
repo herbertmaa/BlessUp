@@ -107,6 +107,7 @@ public class RegisterActivity extends FireBaseActivity {
                     Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(this, ReligionSelectionActivity.class);
                     startActivity(i);
+                    finish(); // Finish the Register Activity
                 } else {
                     Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
