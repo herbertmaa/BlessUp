@@ -14,19 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.bcit.comp3717project.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.Church;
-import model.User;
 
 
 public class ChatChannelAdapter extends ArrayAdapter<Church>{
@@ -68,24 +65,6 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
             chatNotifsText.setVisibility(View.INVISIBLE);
         }
 
-        // add in photo media icon to some channels for visual appeal
-        if(position==4){
-            churchAddressText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check, 0, 0, 0);
-        }
-
-        if(position==5){
-            churchAddressText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_photo_camera, 0, 0, 0);
-        }
-
-        // Check if Current User is Member of Church, Set Invisible if Not.
-        HashMap<String, User> churchMembers = church.getMembers();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-
-        if (churchMembers != null && !churchMembers.containsKey(auth.getCurrentUser().getUid())) {
-            System.out.println("NOT A MEMBER OF THIS CHURCH");
-            listViewItem.setVisibility(View.GONE);
-        }
-
         return listViewItem;
     }
 
@@ -125,4 +104,3 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         //TODO
     }
 }
-

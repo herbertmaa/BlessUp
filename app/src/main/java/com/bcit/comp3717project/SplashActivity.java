@@ -47,7 +47,7 @@ public class SplashActivity extends FireBaseActivity {
     @Override
     protected void onLogin() {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent i = new Intent(this, MainActivity.class); //TODO change this to something else, for now keep it going to Main for testing
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             finish(); // Remove this Activity from the Stack, as it should not be called again.
         }, SPLASH_DELAY_TIME);
