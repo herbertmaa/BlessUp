@@ -107,8 +107,6 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
                 mapRecycler.setAdapter(adapter);
                 GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 1);
                 mapRecycler.setLayoutManager(lm);
-
-
             }
 
             @Override
