@@ -34,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import adapter.ChatListAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -63,7 +64,7 @@ public class ChatActivity extends FireBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
+        Objects.requireNonNull(this.getSupportActionBar()).hide();
         setContentView(R.layout.activity_chat);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarChat);
