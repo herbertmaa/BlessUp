@@ -15,6 +15,7 @@ import android.widget.ListView;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import adapter.ChatChannelAdapter;
 import model.Church;
@@ -34,7 +35,7 @@ public class ChatChannelActivity extends FireBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
+        Objects.requireNonNull(this.getSupportActionBar()).hide();
         setContentView(R.layout.activity_chat_channel);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarChatChannels);
