@@ -30,11 +30,6 @@ public class MainActivity extends FireBaseActivity {
         DatabaseReference myRef = database.getReference("message");
     }
 
-    public void onLoginClick(View view) {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
-    }
-
     public void onSelectReligionClick(View view) {
         Intent i = new Intent(this, ReligionSelectionActivity.class);
         startActivity(i);
@@ -48,13 +43,19 @@ public class MainActivity extends FireBaseActivity {
         churchesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isMemberToAnyChurch = false;
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Church church = postSnapshot.getValue(Church.class);
                     HashMap<String, User> membersMap = church.getMembers();
                     if (membersMap != null && membersMap.containsKey(auth.getCurrentUser().getUid())) {
-                        startActivity(intentChatChannel);
-                        finish();
+                        isMemberToAnyChurch = true;
                     }
+                }
+
+                if (isMemberToAnyChurch) {
+                    startActivity(intentChatChannel);
+                } else {
+                    startActivity(intentNotAMember);
                 }
             }
 
@@ -63,13 +64,6 @@ public class MainActivity extends FireBaseActivity {
 
             }
         });
-        startActivity(intentNotAMember);
-        finish();
-    }
-
-    public void onSelectRegisterClick(View view) {
-        Intent i = new Intent(this, RegisterActivity.class);
-        startActivity(i);
     }
 
     public void onSelectChurchesPageViewClick(View view) {
