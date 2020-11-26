@@ -1,7 +1,6 @@
 package com.bcit.comp3717project;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -9,13 +8,21 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 
-public class LoginActivity extends FireBaseActivity{
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+
+
+public class LoginActivity extends FireBaseActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -35,33 +42,39 @@ public class LoginActivity extends FireBaseActivity{
         EditText email = findViewById(R.id.emailTextField);
         EditText password = findViewById(R.id.emailPasswordTextField);
         if (requiredFieldsAreFilled()) {
-            auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString());
-            checkUserExists();
+            auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success");
+                        FirebaseUser user = auth.getCurrentUser();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.incorrectCredentials), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
+
 
     private boolean requiredFieldsAreFilled() {
         boolean emailIsFilled = true;
         boolean passwordIsFilled = true;
 
-        if(TextUtils.isEmpty(email.getText().toString())) {
+        if(TextUtils.isEmpty(email.getText().toString().trim())) {
             email.setError(getResources().getString(R.string.emailRequired));
             emailIsFilled = false;
         }
 
-        if(TextUtils.isEmpty(password.getText().toString())) {
+        if(TextUtils.isEmpty(password.getText().toString().trim())) {
             password.setError(getResources().getString(R.string.passwordRequired));
             passwordIsFilled = false;
         }
 
         return emailIsFilled && passwordIsFilled;
-    }
-
-    private void checkUserExists() {
-        if (auth.getCurrentUser() == null) {
-            String incorrectCredentials = getResources().getString(R.string.incorrectCredentials);
-            Toast.makeText(LoginActivity.this, incorrectCredentials, Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void makeLinks() {
@@ -97,6 +110,5 @@ public class LoginActivity extends FireBaseActivity{
 
     @Override
     protected void onLogout() {}
-
 
 }
