@@ -79,20 +79,6 @@ public class ChatChannelActivity extends FireBaseActivity {
     }
 
     @Override
-    protected void onLogin() {
-        //todo?
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        startActivity(new Intent(ChatChannelActivity.this, MainActivity.class));
-    }
+    protected void onLogin(){}
 
 }

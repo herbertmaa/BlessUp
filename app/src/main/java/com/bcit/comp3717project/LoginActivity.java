@@ -62,9 +62,8 @@ public class LoginActivity extends FireBaseActivity{
 
     @Override
     protected void onLogin(){
-        Log.e("FUDGE", "CALLED ALOT");
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class); //TODO change this to an appropriate activity
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         Toast.makeText(LoginActivity.this, "Logging in...", Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
