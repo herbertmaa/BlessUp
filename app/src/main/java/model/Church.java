@@ -14,7 +14,7 @@ public class Church implements Serializable {
     private String religion;
     private String description;
     private String imageURL;
-    public HashMap<String, User> members;
+    private HashMap<String, User> members;
 
     public String getImageURL() {
         return imageURL;
@@ -24,7 +24,7 @@ public class Church implements Serializable {
         this.imageURL = imageURL;
     }
 
-    public Church() {}
+    private Church() {}
     public Church(String churchID, String name, String address, String phoneNumber, String religion, String description) {
         this.churchID = churchID;
         this.name = name;
