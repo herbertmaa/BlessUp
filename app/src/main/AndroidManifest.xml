@@ -30,6 +30,7 @@
 
         <activity
             android:name=".ViewChurchesActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.FullScreen" />
         <activity
             android:name=".MainActivity"
@@ -47,7 +48,8 @@
         <activity android:name=".NotAMemberActivity" />
         <activity
             android:name=".ReligionSelectionActivity"
-            android:theme="@style/AppTheme.FullScreen" />
+            android:parentActivityName=".MainActivity"
+        android:theme="@style/AppTheme.FullScreen" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme.FullScreen" />

@@ -85,4 +85,9 @@ public class MainActivity extends FireBaseActivity {
     protected void onLogin() {
         
     }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
+    }
 }

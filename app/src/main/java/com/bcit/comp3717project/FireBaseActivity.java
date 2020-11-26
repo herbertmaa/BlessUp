@@ -28,7 +28,7 @@ public abstract class FireBaseActivity extends AppCompatActivity implements Fire
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
-        finish();
+        finish(); // Finish the previous activity that called log out.
     }
 
     @Override

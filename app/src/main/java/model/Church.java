@@ -14,7 +14,7 @@ public class Church implements Serializable {
     private String religion;
     private String description;
     private String imageURL;
-    private HashMap<String, User> members;
+    public HashMap<String, User> members;
 
     public String getImageURL() {
         return imageURL;
