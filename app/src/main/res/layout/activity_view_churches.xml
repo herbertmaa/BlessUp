@@ -9,7 +9,9 @@ tools:context=".ViewChurchesActivity">
 <com.google.android.material.tabs.TabLayout
     android:id="@+id/tableLayout"
     android:layout_width="match_parent"
-    android:layout_height="49dp"
+    android:layout_marginTop="20dp"
+    android:layout_height="50dp"
+    android:textColor="@color/colorPrimaryDark"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@ tools:context=".ViewChurchesActivity">
 <androidx.viewpager.widget.ViewPager
     android:id="@+id/pager"
     android:layout_width="match_parent"
-    android:layout_height="600dp"
+    android:layout_height="625dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
