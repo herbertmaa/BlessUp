@@ -84,6 +84,7 @@ public class ReligionSelectionActivity extends FireBaseActivity {
         Intent i = new Intent(this, ViewChurchesActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
+        finish(); // Once the user selects a religion, do not allow them to go back to this page.
     }
 
     private AppCompatImageButton.OnTouchListener initAnimateClickListener(String r) {
