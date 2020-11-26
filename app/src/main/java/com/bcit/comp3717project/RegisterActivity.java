@@ -30,7 +30,7 @@ public class RegisterActivity extends FireBaseActivity {
 
     //widgets and firebaseauth
     EditText FullName, UserEmail, Password, PasswordConfirm;
-    Button Register;
+    final int MIN_PASSWORD_LENGTH = 6;
 
 
     @Override
@@ -50,14 +50,10 @@ public class RegisterActivity extends FireBaseActivity {
     }
 
     @Override
-    protected void onLogin() {
-
-    }
+    protected void onLogin() {}
 
     @Override
-    protected void onLogout() {
-
-    }
+    protected void onLogout() {}
 
     public void register(View view) {
 
@@ -66,27 +62,27 @@ public class RegisterActivity extends FireBaseActivity {
         String password = Password.getText().toString().trim();
         String confirmPassword = PasswordConfirm.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
-            UserEmail.setError("Email is Required.");
+        if(TextUtils.isEmpty(email)) {
+            UserEmail.setError(getResources().getString(R.string.emailRequired));
             return;
         }
 
-        if(TextUtils.isEmpty(fullName)){
-            FullName.setError("Name is Required.");
+        if(TextUtils.isEmpty(fullName)) {
+            FullName.setError(getResources().getString(R.string.nameRequired));
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
-            Password.setError("Password is Required");
+        if(TextUtils.isEmpty(password)) {
+            Password.setError(getResources().getString(R.string.passwordRequired));
             return;
         }
 
-        if(password.length() < 6){
-            Password.setError("Password must be at least 6 characters.");
+        if(password.length() < MIN_PASSWORD_LENGTH) {
+            Password.setError(getResources().getString(R.string.minPasswordLength));
         }
 
         if (!password.equals(confirmPassword)) {
-            PasswordConfirm.setError("Both passwords must be identical.");
+            PasswordConfirm.setError(getResources().getString(R.string.identicalPasswords));
         }
 
         else {
@@ -104,12 +100,12 @@ public class RegisterActivity extends FireBaseActivity {
                     User newUser = new User(userID, fullName, fullName, email);
                     DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
                     usersReference.child(userID).setValue(newUser);
-                    Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.userCreated), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(this, ReligionSelectionActivity.class);
                     startActivity(i);
                     finish(); // Finish the Register Activity, the user should not be able to go back to this screen once logged in.
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.errorCreateUser) + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -130,7 +126,6 @@ public class RegisterActivity extends FireBaseActivity {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-
             }
         };
 
