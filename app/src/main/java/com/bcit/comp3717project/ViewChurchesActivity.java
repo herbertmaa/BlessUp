@@ -14,8 +14,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import fragment.ListChurches;
 import fragment.MapChurches;
+import fragment.ListChurches;
 
 public class ViewChurchesActivity extends AppCompatActivity {
 

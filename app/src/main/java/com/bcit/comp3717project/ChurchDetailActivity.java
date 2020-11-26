@@ -1,6 +1,8 @@
 package com.bcit.comp3717project;
 
 import androidx.annotation.NonNull;
+
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -97,6 +99,12 @@ public class ChurchDetailActivity extends FireBaseActivity {
                 FirebaseDatabase.getInstance().getReference("churches").child(church.getChurchID()).setValue(church);
                 Toast toast = Toast.makeText(getApplicationContext(), "You've joined this church!", Toast.LENGTH_LONG);
                 toast.show();
+
+                Intent intent = new Intent(ChurchDetailActivity.this, ChatChannelActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
+
             }
 
             @Override
@@ -106,6 +114,5 @@ public class ChurchDetailActivity extends FireBaseActivity {
         });
 
 
-//        Toast.makeText(ReligionSelectionActivity.this, "You've chosen " + religionChoice, Toast.LENGTH_SHORT).show();
     }
 }

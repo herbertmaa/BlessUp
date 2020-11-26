@@ -2,7 +2,6 @@ package fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,19 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bcit.comp3717project.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-
 import adapter.ChurchAdapter;
 import model.Church;
 
 
 public class ListChurches extends Fragment {
+
+    private ChurchAdapter adapter;
 
     public ListChurches() {
         // Required empty public constructor
@@ -51,32 +46,46 @@ public class ListChurches extends Fragment {
     }
 
     private void initRecyclerView(String name) {
-        RecyclerView listRecycler = getView().findViewById(R.id.recyclerView);
 
+        // Get reference to the recycler view
+        RecyclerView mapRecycler = getView().findViewById(R.id.recyclerView);
+
+        // It is a class provide by the FirebaseUI to make a
+        // query in the database to fetch appropriate data
+        FirebaseRecyclerOptions<Church> options
+                = new FirebaseRecyclerOptions.Builder<Church>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("churches"), Church.class)
+                .build();
+
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        adapter = new ChurchAdapter(options, true);
+
+        mapRecycler.setAdapter(adapter);
         GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 1);
-        listRecycler.setLayoutManager(lm);
-
-        ArrayList<Church> churches = new ArrayList<>();
-        DatabaseReference churchesReference = FirebaseDatabase.getInstance().getReference("churches");
-        churchesReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot churchSnapshot : snapshot.getChildren()) {
-                    Church church = churchSnapshot.getValue(Church.class);
-                    churches.add(church);
-                }
-                Church[] church_array = churches.toArray(new Church[churches.size()]);
-                ChurchAdapter adapter = new ChurchAdapter(church_array, true);
-                listRecycler.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
+        mapRecycler.setLayoutManager(lm);
 
     }
+
+
+
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+
 }

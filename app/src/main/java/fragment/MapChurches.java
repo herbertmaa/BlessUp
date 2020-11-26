@@ -15,25 +15,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.bcit.comp3717project.R;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 import adapter.ChurchAdapter;
 import model.Church;
 
 public class MapChurches extends Fragment implements OnMapReadyCallback {
 
+    private ChurchAdapter adapter;
     private GoogleMap mMap;
     private boolean map_displayed = true;
 
@@ -93,28 +89,21 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.googleMap);
         mapFragment.getMapAsync(this);
 
-        ArrayList<Church> churches = new ArrayList<>();
-        DatabaseReference churchesReference = FirebaseDatabase.getInstance().getReference("churches");
-        churchesReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot churchSnapshot : snapshot.getChildren()) {
-                    Church church = churchSnapshot.getValue(Church.class);
-                    churches.add(church);
-                }
-                Church[] church_array = churches.toArray(new Church[churches.size()]);
-                ChurchAdapter adapter = new ChurchAdapter(church_array, false);
-                mapRecycler.setAdapter(adapter);
-                GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 1);
-                mapRecycler.setLayoutManager(lm);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        // It is a class provide by the FirebaseUI to make a
+        // query in the database to fetch appropriate data
+        FirebaseRecyclerOptions<Church> options
+                = new FirebaseRecyclerOptions.Builder<Church>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("churches"), Church.class)
+                .build();
 
-            }
-        });
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        adapter = new ChurchAdapter(options, true);
 
+        mapRecycler.setAdapter(adapter);
+        GridLayoutManager lm = new GridLayoutManager(getView().getContext(), 1);
+        mapRecycler.setLayoutManager(lm);
 
     }
 
@@ -122,41 +111,52 @@ public class MapChurches extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         float zoomLevel = 18.0f;
-        LatLng vancouver = new LatLng(49.2526718,-123.0659625);
+        LatLng vancouver = new LatLng(49.2526718, -123.0659625);
         mMap.addMarker(new MarkerOptions().position(vancouver).title("Marker in Vancouver"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vancouver, zoomLevel));
         mMap.setMinZoomPreference(6.0f);
         mMap.setMaxZoomPreference(14.0f);
 
         //Willingdon Church marker
-        LatLng c1 = new LatLng(49.2410393,-123.0049571);
+        LatLng c1 = new LatLng(49.2410393, -123.0049571);
         mMap.addMarker(new MarkerOptions().position(c1).title("Willingdon Church"));
 
         //Renfrew Baptist Church marker
-        LatLng c2 = new LatLng(49.2678501,-123.0445683);
+        LatLng c2 = new LatLng(49.2678501, -123.0445683);
         mMap.addMarker(new MarkerOptions().position(c2).title("Renfrew Baptist Church"));
 
         //Pacific Grace MB Church Vancouver
-        LatLng c3 = new LatLng(49.2522421,-123.1040729);
+        LatLng c3 = new LatLng(49.2522421, -123.1040729);
         mMap.addMarker(new MarkerOptions().position(c3).title("Pacific Grace MB Church Vancouver"));
 
         //West Coast Christian Fellowship
-        LatLng c4 = new LatLng(49.2698328,-123.047887);
+        LatLng c4 = new LatLng(49.2698328, -123.047887);
         mMap.addMarker(new MarkerOptions().position(c4).title("West Coast Christian Fellowship"));
 
         //Broadway Church
-        LatLng c5 = new LatLng(49.2617278,-123.0489528);
+        LatLng c5 = new LatLng(49.2617278, -123.0489528);
         mMap.addMarker(new MarkerOptions().position(c5).title("Broadway Church"));
 
         //City Baptist Church
-        LatLng c6 = new LatLng(49.2813891,-123.0496031);
+        LatLng c6 = new LatLng(49.2813891, -123.0496031);
         mMap.addMarker(new MarkerOptions().position(c6).title("City Baptist Church"));
 
     }
 
-    private void initViews(View view) {
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
-
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
 

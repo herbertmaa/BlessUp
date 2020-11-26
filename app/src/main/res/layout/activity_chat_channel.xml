@@ -16,7 +16,7 @@
             android:id="@+id/toolbarChatChannels"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:navigationContentDescription="Navigation Description"
             app:navigationIcon="@drawable/navigation_back">
