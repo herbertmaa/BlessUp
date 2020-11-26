@@ -81,7 +81,7 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         HashMap<String, User> churchMembers = church.getMembers();
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        if (!churchMembers.containsKey(auth.getCurrentUser().getUid())) {
+        if (churchMembers != null && !churchMembers.containsKey(auth.getCurrentUser().getUid())) {
             System.out.println("NOT A MEMBER OF THIS CHURCH");
             listViewItem.setVisibility(View.GONE);
         }
