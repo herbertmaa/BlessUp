@@ -1,10 +1,8 @@
 package model;
 
-import android.location.Location;
-import android.util.Log;
+import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Church implements Serializable {
@@ -94,9 +92,10 @@ public class Church implements Serializable {
         this.members = members;
     }
 
+    @Exclude
     public void addUser(User user) {
         if(members == null) {
-            members = new HashMap<String, User>();
+            members = new HashMap<>();
             members.put(user.getId(), user);
         }else{
             members.put(user.getId(), user);

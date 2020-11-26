@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="6dip">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -18,7 +18,7 @@
         android:id="@+id/church_name_channel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/church_icon_channel"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/church_icon_channel"
         android:gravity="center_vertical"
         android:text="Church Name"
@@ -28,11 +28,11 @@
         android:id="@+id/channel_chat_date_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/church_address_channel"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
+        android:layout_above="@id/church_address_channel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
         android:gravity="center_vertical"
         android:text="YESTERDAY"
         android:textSize="12sp" />
@@ -41,10 +41,9 @@
         android:id="@+id/chat_notifs_txt"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/channel_chat_date_txt"
-        android:layout_marginEnd="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27.5dp"
         android:background="@drawable/circle_notification_drawable"
         android:gravity="center_vertical"
         android:text="1"
@@ -55,21 +54,22 @@
 
     <TextView
         android:id="@+id/church_address_channel"
-        android:layout_below="@id/church_name_channel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/church_icon_channel"
+        android:layout_below="@id/church_name_channel"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/church_icon_channel"
         android:ellipsize="end"
         android:maxLines="1"
-        android:layout_marginTop="4dp"
         android:text="Hey! How are you?"
         android:textSize="12sp" />
+
     <TextView
-        android:layout_below="@id/church_icon_channel"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/church_icon_channel"
         android:layout_marginTop="16dp"
-        android:background="@color/channel_colorLightGray"
-        android:layout_toEndOf="@+id/church_icon_channel" />
+        android:layout_toEndOf="@+id/church_icon_channel"
+        android:background="@color/channel_colorLightGray" />
 </RelativeLayout>
