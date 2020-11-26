@@ -27,7 +27,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="left"
-            android:layout_marginLeft="40dp"
             android:textAlignment="center"
             tools:ignore="RtlCompat" />
 
@@ -35,7 +34,7 @@
             android:id="@+id/chatToolBarText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="25dp"
             android:text="Church Name"
             android:layout_toRightOf="@id/chatToolBarImage"
             android:textSize="20sp"

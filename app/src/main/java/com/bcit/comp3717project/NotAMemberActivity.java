@@ -4,15 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class NotAMemberActivity extends FireBaseActivity {
 
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(this.getSupportActionBar()).hide();
         setContentView(R.layout.activity_not_a_member);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarNotAMember);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override

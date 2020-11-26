@@ -6,8 +6,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+
+import model.Church;
+import model.User;
 
 public class MainActivity extends FireBaseActivity {
 
@@ -31,10 +41,29 @@ public class MainActivity extends FireBaseActivity {
     }
 
     public void onSelectChatChannelClick(View view) {
-        Intent i = new Intent(this, ChatChannelActivity.class);
-        startActivity(i);
-    }
+        Intent intentChatChannel = new Intent(this, ChatChannelActivity.class);
+        Intent intentNotAMember = new Intent(this, NotAMemberActivity.class);
 
+        DatabaseReference churchesRef = FirebaseDatabase.getInstance().getReference("churches");
+        churchesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    Church church = postSnapshot.getValue(Church.class);
+                    HashMap<String, User> membersMap = church.getMembers();
+                    if (membersMap != null && membersMap.containsKey(auth.getCurrentUser().getUid())) {
+                        startActivity(intentChatChannel);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        startActivity(intentNotAMember);
+    }
 
     public void onSelectRegisterClick(View view) {
         Intent i = new Intent(this, RegisterActivity.class);

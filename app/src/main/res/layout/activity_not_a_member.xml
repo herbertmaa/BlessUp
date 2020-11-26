@@ -13,7 +13,7 @@
         android:id="@+id/appBarChatChannels">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarChatChannels"
+            android:id="@+id/toolbarNotAMember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
@@ -42,6 +42,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/indigo_daisy"
         android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:text="@string/tvNotAMember"
         android:textSize="75sp" />
 
