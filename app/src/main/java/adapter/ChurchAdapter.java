@@ -3,11 +3,15 @@ package adapter;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -23,14 +27,15 @@ import java.io.File;
 import io.supercharge.shimmerlayout.ShimmerLayout;
 import model.Church;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 /**
  * Controls how churches are loaded into the Church Card View
  */
-public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder> {
+public class ChurchAdapter extends FirebaseRecyclerAdapter<Church, ChurchAdapter.ViewHolder> {
 
-    private Church[] churches;
-    private boolean loadImages;
+    boolean loadImages;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
@@ -41,62 +46,53 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ViewHolder
         }
     }
 
-    public ChurchAdapter(Church[] churches, boolean loadImages)
-    {
-        this.churches = churches;
+    public ChurchAdapter(@NonNull FirebaseRecyclerOptions<Church> options, boolean loadImages) {
+        super(options);
         this.loadImages = loadImages;
     }
 
+
     @NonNull
     @Override
-    public ChurchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CardView cv = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_church, parent, false);
-
+    public ViewHolder
+    onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_church, parent, false);
         ShimmerLayout skeleton = (ShimmerLayout) cv.findViewById(R.id.shimmer_wrapper);
         skeleton.startShimmerAnimation();
-
         return new ViewHolder(cv);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull ChurchAdapter.ViewHolder holder, int position) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Church model) {
         final CardView cardView = holder.cardView;
 
-        Church currentChurch = churches[position];
-
-        if(loadImages) {
-            loadImageView(currentChurch.getImageURL(), currentChurch.getName(), cardView);
-        }
-        else{
-            View  imgView = cardView.findViewById(R.id.item_image);
+        if (loadImages) {
+            loadImageView(model.getImageURL(), model.getName(), cardView);
+        } else {
+            View imgView = cardView.findViewById(R.id.item_image);
             View shimmer = cardView.findViewById(R.id.shimmer_wrapper);
             shimmer.setVisibility(View.GONE);
             imgView.setVisibility(View.GONE);
         }
 
         TextView churchName = cardView.findViewById(R.id.church_name);
-        churchName.setText(currentChurch.getName());
+        churchName.setText(model.getName());
 
         TextView churchLocation = cardView.findViewById(R.id.church_location);
-        churchLocation.setText(currentChurch.getAddress());
+        churchLocation.setText(model.getAddress());
 
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(cardView.getContext(), ChurchDetailActivity.class);
-                i.putExtra("church", currentChurch);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                cardView.getContext().startActivity(i);
-            }
+        cardView.setOnClickListener(v -> {
+            Intent i = new Intent(cardView.getContext(), ChurchDetailActivity.class);
+            i.putExtra("church", model);
+            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            cardView.getContext().startActivity(i);
         });
+
+
     }
 
-    @Override
-    public int getItemCount() {
-        return churches.length;
-    }
 
     private void loadImageView(String url, String churchName, CardView cv) {
 
