@@ -28,7 +28,7 @@
 
         <activity
             android:name=".ViewChurchesActivity"
-            android:theme="@style/AppTheme.FullScreen"
+            android:theme="@style/AppTheme.FullScreen"/>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
