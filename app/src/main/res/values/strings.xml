@@ -30,4 +30,6 @@
     <string name="chatChannelsText">Chats</string>
     <string name="tvNotAMember">Join a church to start talking</string>
     <string name="viewChurches">view churches</string>
+    <string name="appGreeting">Connect and convocate with others</string>
+    <string name="churchNamePlaceholder">Church Name</string>
 </resources>

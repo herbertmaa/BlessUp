@@ -53,6 +53,7 @@ public class MainActivity extends FireBaseActivity {
                     HashMap<String, User> membersMap = church.getMembers();
                     if (membersMap != null && membersMap.containsKey(auth.getCurrentUser().getUid())) {
                         startActivity(intentChatChannel);
+                        finish();
                     }
                 }
             }
@@ -63,6 +64,7 @@ public class MainActivity extends FireBaseActivity {
             }
         });
         startActivity(intentNotAMember);
+        finish();
     }
 
     public void onSelectRegisterClick(View view) {
