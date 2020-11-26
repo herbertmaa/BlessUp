@@ -62,22 +62,11 @@ public class RegisterActivity extends FireBaseActivity {
         String password = Password.getText().toString().trim();
         String confirmPassword = PasswordConfirm.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)) {
-            UserEmail.setError(getResources().getString(R.string.emailRequired));
+        if (!requiredFieldsAreFilled()) {
             return;
         }
 
-        if(TextUtils.isEmpty(fullName)) {
-            FullName.setError(getResources().getString(R.string.nameRequired));
-            return;
-        }
-
-        if(TextUtils.isEmpty(password)) {
-            Password.setError(getResources().getString(R.string.passwordRequired));
-            return;
-        }
-
-        if(password.length() < MIN_PASSWORD_LENGTH) {
+        if (password.length() < MIN_PASSWORD_LENGTH) {
             Password.setError(getResources().getString(R.string.minPasswordLength));
         }
 
@@ -110,12 +99,43 @@ public class RegisterActivity extends FireBaseActivity {
             });
         }
     }
+
+    private boolean requiredFieldsAreFilled() {
+        boolean nameIsFilled = true;
+        boolean emailIsFilled = true;
+        boolean passwordIsFilled = true;
+        boolean confirmIsFilled = true;
+
+        if(TextUtils.isEmpty(FullName.getText().toString().trim())) {
+            FullName.setError(getResources().getString(R.string.emailRequired));
+            nameIsFilled = false;
+        }
+
+        if(TextUtils.isEmpty(UserEmail.getText().toString().trim())) {
+            UserEmail.setError(getResources().getString(R.string.emailRequired));
+            emailIsFilled = false;
+        }
+
+        if(TextUtils.isEmpty(Password.getText().toString().trim())) {
+            Password.setError(getResources().getString(R.string.passwordRequired));
+            passwordIsFilled = false;
+        }
+
+        if(TextUtils.isEmpty(PasswordConfirm.getText().toString().trim())) {
+            PasswordConfirm.setError(getResources().getString(R.string.passwordRequired));
+            confirmIsFilled = false;
+        }
+
+        return nameIsFilled && emailIsFilled && passwordIsFilled && confirmIsFilled;
+    }
+
     private void updateUserDisplayName(String displayName, FirebaseUser user) {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(displayName)
                 .build();
         user.updateProfile(profileUpdates);
     }
+
     private void makeLinks() {
 
         SpannableString string = new SpannableString(getResources().getString(R.string.loginRedirectText));
