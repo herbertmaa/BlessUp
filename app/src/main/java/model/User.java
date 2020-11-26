@@ -1,35 +1,32 @@
 package model;
 
-import android.location.Location;
-
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 public class User implements Serializable {
 
-    private String userID = null;
-    private String password = null;
-    private String firstName = null;
-    private String lastName = null;
-    private Date dateOfBirth = null;
-    private String emailAddress = null;
-    private Location address = null;
-    private Church church = null;
-    private String joinDate = null;
-    private String lastActive = null;
-    private String gender = null;
-    private String religion = null;
-    private String userType = null;
+    private String userID;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private Date dateOfBirth;
+    private String emailAddress;
+    private String joinDate;
+    private String lastActive;
+    private String gender;
+    private String religion;
+    private String userType;
     private int age = 0;
 
-    private User() {}
+    public User() {
+    }
 
     public String getEmailAddress() {
         return emailAddress;
     }
 
-    public User(String userID, String firstName, String lastName, String emailAddress){
+    public User(String userID, String firstName, String lastName, String emailAddress) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +36,7 @@ public class User implements Serializable {
         this.lastActive = joinDate;
         this.religion = "NONE";
     }
+
     public String getId() {
         return userID;
     }
@@ -77,22 +75,6 @@ public class User implements Serializable {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Location getAddress() {
-        return address;
-    }
-
-    public void setAddress(Location address) {
-        this.address = address;
-    }
-
-    public Church getChurch() {
-        return church;
-    }
-
-    public void setChurch(Church church) {
-        this.church = church;
     }
 
     public String getJoinDate() {
@@ -146,5 +128,15 @@ public class User implements Serializable {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+
 }
 

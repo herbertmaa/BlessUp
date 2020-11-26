@@ -39,6 +39,7 @@ public class ChatChannelActivity extends FireBaseActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+                finish();
             }
         });
         churchDBRef = FirebaseDatabase.getInstance().getReference("churches");
@@ -50,7 +51,9 @@ public class ChatChannelActivity extends FireBaseActivity {
         churchDBRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                churchList.add(dataSnapshot.getValue(Church.class));
+                Church my_church = (dataSnapshot.getValue(Church.class));
+                if(my_church.members == null || !my_church.members.containsKey(auth.getUid())) return;
+                churchList.add(my_church);
                 adapter.notifyDataSetChanged();
             }
             @Override

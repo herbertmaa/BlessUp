@@ -42,7 +42,8 @@
             android:name=".ChatActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ChatChannelActivity" />
+        <activity android:name=".ChatChannelActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".NotAMemberActivity" />
         <activity
             android:name=".ReligionSelectionActivity"

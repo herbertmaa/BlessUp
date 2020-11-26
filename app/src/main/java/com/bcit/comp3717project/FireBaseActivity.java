@@ -44,6 +44,7 @@ public abstract class FireBaseActivity extends AppCompatActivity implements Fire
     }
 
 
+
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         FirebaseUser user = firebaseAuth.getCurrentUser();

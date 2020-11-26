@@ -94,8 +94,9 @@ public class ChurchDetailActivity extends FireBaseActivity {
         usersReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 User u = snapshot.getValue(User.class);
-                church.addUser(u);
+                church.addUser(u); // Churches have a list of users that are a part of the church.
                 FirebaseDatabase.getInstance().getReference("churches").child(church.getChurchID()).setValue(church);
                 Toast toast = Toast.makeText(getApplicationContext(), "You've joined this church!", Toast.LENGTH_LONG);
                 toast.show();
