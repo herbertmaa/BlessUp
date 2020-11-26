@@ -93,34 +93,6 @@ public class ChatChannelActivity extends FireBaseActivity {
     {
         super.onBackPressed();
         startActivity(new Intent(ChatChannelActivity.this, MainActivity.class));
-        finish();
     }
 
 }
-//    private DatabaseReference getParentReference(DataSnapshot snapshot) {
-//        DatabaseReference ref = snapshot.getRef();
-//        return ref.getParent();
-//    }
-//        chatReference.setValue(church[0]);
-//
-//        // Check if a chat exists for this church channel
-//        Query churchQuery = chatReference.orderByChild("churchID").equalTo(churchID);
-//        churchQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if(!dataSnapshot.exists()) {
-//                    // Create a new chat for this church
-//                    String chatID = chatReference.push().getKey();
-//                    Chat newChat = new Chat(chatID, church[0]);
-//                    chatReference.child(chatID).setValue(newChat);
-//                    channelReference = chatReference.child(chatID);
-//                } else {
-//                    channelReference = getParentReference(dataSnapshot);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.e(TAG, " Reading Chat/Creating Chat", databaseError.toException());
-//            }
-//        });
-//

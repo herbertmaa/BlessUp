@@ -43,18 +43,19 @@ public class MainActivity extends FireBaseActivity {
         churchesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isMemberToAnyChurch = false;
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Church church = postSnapshot.getValue(Church.class);
                     HashMap<String, User> membersMap = church.getMembers();
                     if (membersMap != null && membersMap.containsKey(auth.getCurrentUser().getUid())) {
-                        Log.e("WHy?", "why so many");
-                        startActivity(intentChatChannel);
-                        finish();
-                    }else{
-                        Log.e("WHy?", "why so many");
-                        startActivity(intentNotAMember);
-                        finish();
+                        isMemberToAnyChurch = true;
                     }
+                }
+
+                if (isMemberToAnyChurch) {
+                    startActivity(intentChatChannel);
+                } else {
+                    startActivity(intentNotAMember);
                 }
             }
 
