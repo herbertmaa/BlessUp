@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
@@ -17,22 +18,49 @@ import android.widget.Toast;
 public class LoginActivity extends FireBaseActivity{
 
     private static final String TAG = "MainActivity";
-    SharedPreferences pref;
+
+    EditText email;
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        email = findViewById(R.id.emailTextField);
+        password = findViewById(R.id.emailPasswordTextField);
         makeLinks();
     }
 
     public void logIn(View view) {
         EditText email = findViewById(R.id.emailTextField);
         EditText password = findViewById(R.id.emailPasswordTextField);
-        if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
+        if (requiredFieldsAreFilled()) {
             auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString());
+            checkUserExists();
+        }
+    }
+
+    private boolean requiredFieldsAreFilled() {
+        boolean emailIsFilled = true;
+        boolean passwordIsFilled = true;
+
+        if(TextUtils.isEmpty(email.getText().toString())) {
+            email.setError(getResources().getString(R.string.emailRequired));
+            emailIsFilled = false;
+        }
+
+        if(TextUtils.isEmpty(password.getText().toString())) {
+            password.setError(getResources().getString(R.string.passwordRequired));
+            passwordIsFilled = false;
+        }
+
+        return emailIsFilled && passwordIsFilled;
+    }
+
+    private void checkUserExists() {
+        if (auth.getCurrentUser() == null) {
+            String incorrectCredentials = getResources().getString(R.string.incorrectCredentials);
+            Toast.makeText(LoginActivity.this, incorrectCredentials, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -46,7 +74,6 @@ public class LoginActivity extends FireBaseActivity{
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-
             }
         };
 
@@ -60,17 +87,16 @@ public class LoginActivity extends FireBaseActivity{
 
 
     @Override
-    protected void onLogin(){
+    protected void onLogin() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        Toast.makeText(LoginActivity.this, "Logging in...", Toast.LENGTH_SHORT).show();
+        String loggingIn = getResources().getString(R.string.loggingIn);
+        Toast.makeText(LoginActivity.this, loggingIn, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 
     @Override
-    protected void onLogout(){
-
-    }
+    protected void onLogout() {}
 
 
 }
