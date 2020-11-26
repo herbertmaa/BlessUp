@@ -98,7 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:onClick="register"
-            android:text="@string/action_register" />
+            android:text="@string/action_register"
+            app:backgroundTint="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/loginRedirectText"

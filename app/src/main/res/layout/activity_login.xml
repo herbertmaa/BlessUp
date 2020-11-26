@@ -74,7 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:onClick="logIn"
-            android:text="@string/loginButtonText" />
+            android:text="@string/loginButtonText"
+            app:backgroundTint="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/registerRedirectText"
