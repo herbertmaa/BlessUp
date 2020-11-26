@@ -32,4 +32,9 @@
     <string name="viewChurches">view churches</string>
     <string name="appGreeting">Connect and convocate with others</string>
     <string name="churchNamePlaceholder">Church Name</string>
+    <string name="app_slogan">"Connect and convocate with others "</string>
+    <string name="selectChatButtonText">Chats and groups</string>
+    <string name="selectChurchButtonText">Find a church</string>
+    <string name="selectReligionButtonText">Update your religion</string>
+    >>>>>>> Stashed changes
 </resources>
