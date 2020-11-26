@@ -23,14 +23,10 @@ import model.Church;
 public class ChatChannelActivity extends FireBaseActivity {
 
     private Toolbar toolbar;
-
     ArrayList<Church> churchList = new ArrayList<>();
     ChatChannelAdapter adapter;
     ListView lvChatChannels;
-
     DatabaseReference churchDBRef;
-
-    String chatID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +34,7 @@ public class ChatChannelActivity extends FireBaseActivity {
         Objects.requireNonNull(this.getSupportActionBar()).hide();
         setContentView(R.layout.activity_chat_channel);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarChatChannels);
+        toolbar = findViewById(R.id.toolbarChatChannels);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +42,7 @@ public class ChatChannelActivity extends FireBaseActivity {
             }
         });
         churchDBRef = FirebaseDatabase.getInstance().getReference("churches");
-        lvChatChannels = (ListView) findViewById(R.id.lv_chat_channel);
+        lvChatChannels = findViewById(R.id.lv_chat_channel);
 
         adapter = new ChatChannelAdapter(ChatChannelActivity.this, churchList);
         lvChatChannels.setAdapter(adapter);
@@ -90,6 +86,14 @@ public class ChatChannelActivity extends FireBaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(ChatChannelActivity.this, MainActivity.class));
+        finish();
     }
 
 }

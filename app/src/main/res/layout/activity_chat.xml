@@ -35,8 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="Church Name"
-            android:textColor="@color/beige"
+            android:text="@string/churchNamePlaceholder"
+            android:textColor="@color/pureWhite"
             android:layout_toRightOf="@id/chatToolBarImage"
             android:textSize="20sp"
             android:textStyle="bold"/>

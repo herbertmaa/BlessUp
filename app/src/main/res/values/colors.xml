@@ -15,7 +15,7 @@
     <color name="chatTheirTimeStamp">#8C8B8B</color>
     <color name="chatMyTimeStamp">#B3B0B0</color>
     <color name="chatName">#DCDCDC</color>
-    <color name="beige">#F1EDED</color>
+    <color name="pureWhite">#FFFFFF</color>
     <color name="chat_channel_border_color">#FF000000</color>
 
     <!--Chat Channels-->

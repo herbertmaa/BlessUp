@@ -67,12 +67,12 @@ public class ChatActivity extends FireBaseActivity {
         Objects.requireNonNull(this.getSupportActionBar()).hide();
         setContentView(R.layout.activity_chat);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarChat);
+        toolbar = findViewById(R.id.toolbarChat);
         toolBarImage = findViewById(R.id.chatToolBarImage);
         toolBarText = findViewById(R.id.chatToolBarText);
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendMessage = findViewById(R.id.btnSendMessage);
-        lvChat = (ListView) findViewById(R.id.lvChat);
+        lvChat = findViewById(R.id.lvChat);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
