@@ -36,8 +36,6 @@ public class MainActivity extends FireBaseActivity {
     }
 
     public void onSelectChatChannelClick(View view) {
-        Intent intentChatChannel = new Intent(this, ChatChannelActivity.class);
-        Intent intentNotAMember = new Intent(this, NotAMemberActivity.class);
 
         DatabaseReference churchesRef = FirebaseDatabase.getInstance().getReference("churches");
         churchesRef.addValueEventListener(new ValueEventListener() {
@@ -53,8 +51,10 @@ public class MainActivity extends FireBaseActivity {
                 }
 
                 if (isMemberToAnyChurch) {
+                    Intent intentChatChannel = new Intent(MainActivity.this, ChatChannelActivity.class);
                     startActivity(intentChatChannel);
                 } else {
+                    Intent intentNotAMember = new Intent(MainActivity.this, NotAMemberActivity.class);
                     startActivity(intentNotAMember);
                 }
             }
