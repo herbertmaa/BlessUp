@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -55,13 +56,15 @@ public class ViewChurchesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_churches);
 
-        TabLayout tabLayout = findViewById(R.id.tableLayout);
-        ViewPager pager = findViewById(R.id.pager);
-        tabLayout.setupWithViewPager(pager);
+        if(getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            TabLayout tabLayout = findViewById(R.id.tableLayout);
+            ViewPager pager = findViewById(R.id.pager);
+            tabLayout.setupWithViewPager(pager);
 
-        SectionsPageAdapter pagerAdapter = new SectionsPageAdapter(getSupportFragmentManager()){};
-        pagerAdapter.addFragment(new ListChurches(), "List");
-        pagerAdapter.addFragment(new MapChurches(), "Map");
-        pager.setAdapter(pagerAdapter);
+            SectionsPageAdapter pagerAdapter = new SectionsPageAdapter(getSupportFragmentManager()){};
+            pagerAdapter.addFragment(new ListChurches(), "List");
+            pagerAdapter.addFragment(new MapChurches(), "Map");
+            pager.setAdapter(pagerAdapter);
+        }
     }
 }
