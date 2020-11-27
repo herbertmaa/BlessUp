@@ -36,6 +36,10 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.FullScreen" />
 
+<!--        <activity-->
+<!--            android:name=".AboutUsActivity"-->
+<!--            android:theme="@style/AppTheme.FullScreen" />-->
+
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.FullScreen" />
