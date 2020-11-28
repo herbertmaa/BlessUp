@@ -25,7 +25,11 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.Church;
 
-
+/**
+ * Populates ListView for ChatChannelActivity. Each list item contains details
+ * (an image, address and icons) that are associated with the Church chat channel that the
+ * current user has joined
+ */
 public class ChatChannelAdapter extends ArrayAdapter<Church>{
     private Activity context;
     private List<Church> churchList;
@@ -36,10 +40,19 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         this.churchList = churchList;
     }
 
+    /**
+     * Total count of Churches in Firebase
+     * @return - the total number of churches
+     */
     public int getCount() {
         return churchList.size();
     }
 
+    /**
+     * Populates each ListView item with an image to represent the Church, an address,
+     * a string detailing the timestamp of when the last message in the channel was
+     * received, and icons representing the number of unread messages
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -68,6 +81,11 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         return listViewItem;
     }
 
+    /**
+     * Random integer to mock the case in which a user has received multiple
+     * unviewed messages
+     * @return a random integer between 0 & 5
+     */
     private int getRandomNumber() {
         Random random = new Random();
         int x = random.nextInt(5);
@@ -82,6 +100,12 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
             return 3;
     }
 
+    /**
+     * Loads the @param churchName's associated image from @url FirebaseStorage and sets loaded image to @param image
+     * @param url - url the image stored in FireStore
+     * @param churchName - the church this image is associated with
+     * @param image - CircleImageView being set
+     */
     private void loadImageView(String url, String churchName, CircleImageView image) {
         try {
             StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child(url);
@@ -98,9 +122,5 @@ public class ChatChannelAdapter extends ArrayAdapter<Church>{
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void getLastChatMessageBody() {
-        //TODO
     }
 }
