@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
+/**
+ * This class holds all the firebase listener and other classes extend from here to use firebase methods.
+ */
 public abstract class FireBaseActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener {
 
     public static String TAG = "FireBaseActivity";

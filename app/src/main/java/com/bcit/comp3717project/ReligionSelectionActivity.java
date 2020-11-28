@@ -19,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * Religion selection activity allows the user to select a religion
+ */
 public class ReligionSelectionActivity extends FireBaseActivity {
 
     SharedPreferences pref;
@@ -75,6 +78,11 @@ public class ReligionSelectionActivity extends FireBaseActivity {
 
     }
 
+    /**
+     * Sets the religion selection once a religion has been selected by the user and
+     * presents a confirmation toast.
+     * @param view
+     */
     public void onConfirmClick(View view) {
         FirebaseUser firebaseUser = auth.getCurrentUser();
         String userID = firebaseUser.getUid();
@@ -87,6 +95,11 @@ public class ReligionSelectionActivity extends FireBaseActivity {
         finish(); // Once the user selects a religion, do not allow them to go back to this page.
     }
 
+    /**
+     * Animation for when clicking/selecting a religion
+     * @param r
+     * @return
+     */
     private AppCompatImageButton.OnTouchListener initAnimateClickListener(String r) {
         Animation scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
         Animation scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
@@ -120,6 +133,4 @@ public class ReligionSelectionActivity extends FireBaseActivity {
         };
         return animateClick;
     }
-
-
 }
