@@ -10,6 +10,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * SplashActivity that starts on app start up
+ */
 public class SplashActivity extends FireBaseActivity {
 
     private static int SPLASH_DELAY_TIME = 3000;
@@ -27,6 +30,9 @@ public class SplashActivity extends FireBaseActivity {
         initHooks();
     }
 
+    /**
+     * Initializes the animation on app startup
+     */
     private void initHooks() {
         // Initialize the animations
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_down);
