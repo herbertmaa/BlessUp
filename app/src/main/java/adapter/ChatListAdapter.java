@@ -48,7 +48,7 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
 
     /**
      * Returns the total number of messages in the messageList
-     * @return
+     * @return - total number of messages
      */
     public int getCount() {
         return messageList.size();

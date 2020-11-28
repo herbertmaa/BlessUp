@@ -160,7 +160,7 @@ public class ChatActivity extends FireBaseActivity {
 
     /**
      * Creates a ChatMessage object using @param message, links it to current firebase user and pushes message to firebase.
-     * @param message
+     * @param message - the message string that will be inserted into Firebase wrapped with a ChatMessage object
      */
     private void createMessage(String message) {
         FirebaseUser firebaseUser = auth.getCurrentUser();
