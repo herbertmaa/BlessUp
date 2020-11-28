@@ -30,36 +30,83 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import adapter.ChatListAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.ChatMessage;
 import model.Church;
 import model.User;
 
+/**
+ * Activity providing current user with a Chat Thread that is linked with
+ * a Church that the user has joined.
+ */
 public class ChatActivity extends FireBaseActivity {
 
     private static final String TAG = "ChatActivity";
 
+    /**
+     * Toolbar containing Church Details linked to this chat
+     */
     private Toolbar toolbar;
+
+    /**
+     * Text input field to create new messages
+     */
     private EditText editTextMessage;
+
+    /**
+     * Button used to send completed messages to Firebase
+     */
     private Button buttonSendMessage;
+
+    /**
+     * Image View hosting church's image
+     */
     private CircleImageView toolBarImage;
+
+    /**
+     * TextView for toolbar
+     */
     private TextView toolBarText;
 
+    /**
+     * List View used to render chat messages
+     */
     ListView lvChat;
+
+    /**
+     * List  containing chat messages
+     */
     List<ChatMessage> messagesList = new ArrayList<ChatMessage>();
+
+    /**
+     * Adapter to render each message into the list view
+     */
     ChatListAdapter adapter;
 
+    /**
+     * Firebase database reference to this chat
+     */
     DatabaseReference chatReference;
+
+    /**
+     * Firebase database reference to churches
+     */
     DatabaseReference churchReference;
 
+    /**
+     * The church this chat activity is linked to
+     */
     Church church;
+
+    /**
+     * The Firebase ID used to retreive linked church object
+     */
+    String churchID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +121,11 @@ public class ChatActivity extends FireBaseActivity {
         buttonSendMessage = findViewById(R.id.btnSendMessage);
         lvChat = findViewById(R.id.lvChat);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        Intent intent = getIntent();
+        churchID = intent.getStringExtra("churchID");
+
+        renderToolbar();
+        renderChatThread();
 
         buttonSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,60 +133,10 @@ public class ChatActivity extends FireBaseActivity {
                 sendMessage();
             }
         });
-
-        adapter = new ChatListAdapter(ChatActivity.this, messagesList);
-        lvChat.setAdapter(adapter);
-
-        Intent intent = getIntent();
-        String churchID = intent.getStringExtra("churchID");
-
-        churchReference = FirebaseDatabase.getInstance().getReference("churches/"+ churchID);
-        churchReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                church = snapshot.getValue(Church.class);
-                loadToolbarImage(church.getImageURL(), church.getName(), toolBarImage);
-                toolBarText.setText(church.getName());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e(TAG, "Hydrating Church (CHAT ACTIVITY)", databaseError.toException());
-            }
-        });
-
-        chatReference = FirebaseDatabase.getInstance().getReference("chat-" + churchID);
-
-        chatReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                messagesList.add(dataSnapshot.getValue(ChatMessage.class));
-                adapter.notifyDataSetChanged();
-                lvChat.smoothScrollToPosition(adapter.getCount() - 1);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 
     @Override
-    protected void onLogin() {
-
-    }
+    protected void onLogin() {}
 
 
     @Override
@@ -148,6 +144,9 @@ public class ChatActivity extends FireBaseActivity {
         super.onStart();
     }
 
+    /**
+     * Creates and Sends a message string to Firebase Database. Associates the message with the current firebase user
+     */
     private void sendMessage() {
         String message = editTextMessage.getText().toString();
 
@@ -156,6 +155,14 @@ public class ChatActivity extends FireBaseActivity {
             return;
         }
 
+        createMessage(message);
+    }
+
+    /**
+     * Creates a ChatMessage object using @param message, links it to current firebase user and pushes message to firebase.
+     * @param message
+     */
+    private void createMessage(String message) {
         FirebaseUser firebaseUser = auth.getCurrentUser();
         String userUid = firebaseUser.getUid();
         User newUser = new User(userUid, firebaseUser.getDisplayName(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
@@ -183,6 +190,39 @@ public class ChatActivity extends FireBaseActivity {
         });
     }
 
+    /**
+     * Renders the Toolbar, sets Toolbar Image & Text
+     */
+    private void renderToolbar() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        churchReference = FirebaseDatabase.getInstance().getReference("churches/"+ churchID);
+        churchReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                church = snapshot.getValue(Church.class);
+                loadToolbarImage(church.getImageURL(), church.getName(), toolBarImage);
+                toolBarText.setText(church.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "Error Loading Church From Firebase", databaseError.toException());
+            }
+        });
+    }
+
+    /**
+     * Loads the @param churchName's associated image from @url FirebaseStorage and sets loaded image to @param image
+     * @param url - url the image stored in FireStore
+     * @param churchName - the church this image is associated with
+     * @param image - CircleImageView being set
+     */
     @SuppressLint("RestrictedApi")
     private void loadToolbarImage(String url, String churchName, CircleImageView image) {
         try {
@@ -201,4 +241,40 @@ public class ChatActivity extends FireBaseActivity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Renders the Chat by populating the ListView with ChatMessages obtained from Firebase.
+     * Sets a listener to update Chat List View whenever a new ChatMessage is created and sent
+     * to Firebase
+     */
+    private void renderChatThread() {
+        adapter = new ChatListAdapter(ChatActivity.this, messagesList);
+        lvChat.setAdapter(adapter);
+
+        chatReference = FirebaseDatabase.getInstance().getReference("chat-" + churchID);
+        chatReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                messagesList.add(dataSnapshot.getValue(ChatMessage.class));
+                adapter.notifyDataSetChanged();
+                lvChat.smoothScrollToPosition(adapter.getCount() - 1);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    };
 }

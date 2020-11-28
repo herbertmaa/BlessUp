@@ -20,12 +20,37 @@ import java.util.Objects;
 import adapter.ChatChannelAdapter;
 import model.Church;
 
+/**
+ * Activity providing current user with a list of Church Chat Channels each
+ * chat channel linked to a church that the user has joined.
+ */
 public class ChatChannelActivity extends FireBaseActivity {
 
+    /**
+     * Toolbar used to provide user with details about the current activity
+     */
     private Toolbar toolbar;
+
+    /**
+     * List of churches stored in Firebase
+     */
     ArrayList<Church> churchList = new ArrayList<>();
-    ChatChannelAdapter adapter;
+
+    /**
+     * List View to populate populate ChatChannelActivity
+     * with Chats for Churches the current firebase user has joined
+     */
     ListView lvChatChannels;
+
+    /**
+     * Renders each ListView item
+     */
+    ChatChannelAdapter adapter;
+
+    /**
+     * Church Firebase Reference used to populate ChatChannelActivity
+     * with Chats for Churches the current firebase user has joined
+     */
     DatabaseReference churchDBRef;
 
     @Override
@@ -42,6 +67,16 @@ public class ChatChannelActivity extends FireBaseActivity {
                 finish();
             }
         });
+
+        renderChatChannels();
+    }
+
+    /**
+     * Renders the ChatChannel ListView onto Layout. Populates the ListView with
+     * Churches that the current firebase user has joined. Sets a click handler on each
+     * ListView Item to push to the correct Chat Channel.
+     */
+    private void renderChatChannels() {
         churchDBRef = FirebaseDatabase.getInstance().getReference("churches");
         lvChatChannels = findViewById(R.id.lv_chat_channel);
 
