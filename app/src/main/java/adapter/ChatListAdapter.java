@@ -61,9 +61,9 @@ public class ChatListAdapter extends ArrayAdapter<ChatMessage> {
      */
     @NonNull
     @Override
+
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-
         ChatMessage chatMessage = messageList.get(position);
         View listViewItem;
 

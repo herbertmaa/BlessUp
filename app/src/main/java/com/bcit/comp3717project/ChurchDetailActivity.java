@@ -41,6 +41,10 @@ public class ChurchDetailActivity extends FireBaseActivity {
     }
 
 
+    /**
+     * Helper function to display church details
+     * to be called after the content has been set
+     */
     private void displayChurchDetails() {
         Church church = (Church) getIntent().getExtras().get("church");
 
@@ -63,6 +67,12 @@ public class ChurchDetailActivity extends FireBaseActivity {
 
     }
 
+    /**
+     * Load images from a URL
+     * @param url - The URL of the image
+     * @param churchName - The church this image refers to
+     * @param v - The imageview to load this image into
+     */
     private void loadImageView(String url, String churchName, ImageView v) {
 
         try {
@@ -85,8 +95,14 @@ public class ChurchDetailActivity extends FireBaseActivity {
 
     }
 
+
+    /**
+     * Onclick event that handles when a user tries to join a church
+     * @param view
+     */
     public void onJoinChurch(View view) {
 
+        // Get the church that the user wants to join
         Church church = (Church) getIntent().getExtras().get("church");
         String userID = auth.getCurrentUser().getUid();
         DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
@@ -95,6 +111,7 @@ public class ChurchDetailActivity extends FireBaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                // Add the user to the church
                 User u = snapshot.getValue(User.class);
                 church.addUser(u); // Churches have a list of users that are a part of the church.
                 FirebaseDatabase.getInstance().getReference("churches").child(church.getChurchID()).setValue(church);

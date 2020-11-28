@@ -3,12 +3,16 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
+
+/**
+ * This class represents the information pertaining to a chat message
+ */
 public class ChatMessage {
-    private String messageID;
-    private String message;
-    private User createdBy;
-    private Date createdAt;
-    private String messageType;
+    private String messageID; // Unique message id generated from database
+    private String message; // The message
+    private User createdBy; // The user ID that created this message
+    private Date createdAt; // The date this message was created
+    private String messageType; // The type of message
 
     public ChatMessage() {};
 
