@@ -5,16 +5,19 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * This class represents a church
+ */
 public class Church implements Serializable {
 
-    private String churchID;
-    private String name;
-    private String address;
-    private String phoneNumber;
-    private String religion;
-    private String description;
-    private String imageURL;
-    public HashMap<String, User> members;
+    private String churchID; // Unique church id
+    private String name; // The name of the church
+    private String address; // The address of the church
+    private String phoneNumber; // The phone number of this church
+    private String religion; // The type of religion this church belongs under
+    private String description; // A description of the church
+    private String imageURL; // A image URL showcasing this church
+    public HashMap<String, User> members; // A hashmap of user id, and Users that belong to this church
 
     public String getImageURL() {
         return imageURL;

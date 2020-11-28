@@ -36,12 +36,14 @@ public abstract class FireBaseActivity extends AppCompatActivity implements Fire
     @Override
     protected void onStart() {
         super.onStart();
+        // Add the listener when this activity starts
         FirebaseAuth.getInstance().addAuthStateListener(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        // Remove the listener when this activity stops
         FirebaseAuth.getInstance().removeAuthStateListener(this);
     }
 
