@@ -23,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import model.User;
 
-
+/**
+ * Register activity registers a user to our app using firebase auth.
+ */
 public class RegisterActivity extends FireBaseActivity {
 
     SharedPreferences pref;
@@ -55,6 +57,10 @@ public class RegisterActivity extends FireBaseActivity {
     @Override
     protected void onLogout() {}
 
+    /**
+     * Registers a user to firebase and the app
+     * @param view
+     */
     public void register(View view) {
 
         String fullName = FullName.getText().toString().trim();
@@ -62,6 +68,9 @@ public class RegisterActivity extends FireBaseActivity {
         String password = Password.getText().toString().trim();
         String confirmPassword = PasswordConfirm.getText().toString().trim();
 
+        /**
+         * Following if's to check for text fields and password authentication.
+         */
         if (!requiredFieldsAreFilled()) {
             return;
         }
@@ -100,6 +109,10 @@ public class RegisterActivity extends FireBaseActivity {
         }
     }
 
+    /**
+     * To check if text fields for registration activity are filled.
+     * @return boolean if text fields are filled
+     */
     private boolean requiredFieldsAreFilled() {
         boolean nameIsFilled = true;
         boolean emailIsFilled = true;
@@ -136,6 +149,9 @@ public class RegisterActivity extends FireBaseActivity {
         user.updateProfile(profileUpdates);
     }
 
+    /**
+     * Makes link for login activity if user already has an existing account
+     */
     private void makeLinks() {
 
         SpannableString string = new SpannableString(getResources().getString(R.string.loginRedirectText));

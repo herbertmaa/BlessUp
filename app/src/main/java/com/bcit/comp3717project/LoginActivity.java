@@ -21,7 +21,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
-
+/**
+ * LoginActivity for when an existing user wants to login
+ */
 public class LoginActivity extends FireBaseActivity {
 
     private static final String TAG = "MainActivity";
@@ -38,6 +40,10 @@ public class LoginActivity extends FireBaseActivity {
         makeLinks();
     }
 
+    /**
+     * Logins an exiting user by checking user's credentials on firebase
+     * @param view
+     */
     public void logIn(View view) {
         EditText email = findViewById(R.id.emailTextField);
         EditText password = findViewById(R.id.emailPasswordTextField);
@@ -60,6 +66,10 @@ public class LoginActivity extends FireBaseActivity {
     }
 
 
+    /**
+     * Checks the required textfields are filled to login
+     * @return
+     */
     private boolean requiredFieldsAreFilled() {
         boolean emailIsFilled = true;
         boolean passwordIsFilled = true;
@@ -77,6 +87,9 @@ public class LoginActivity extends FireBaseActivity {
         return emailIsFilled && passwordIsFilled;
     }
 
+    /**
+     * Clickable link to the signup/registration activity if user does not have an existing account
+     */
     private void makeLinks() {
 
         SpannableString string = new SpannableString(getResources().getString(R.string.registerRedirectText));
