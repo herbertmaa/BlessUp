@@ -5,6 +5,9 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * This class represents a church
+ */
 public class Church implements Serializable {
 
     /**
@@ -36,7 +39,12 @@ public class Church implements Serializable {
      * The image url that contains a photo of this church
      */
     private String imageURL;
+  
+    /**
+    * A hashmap of user id, and Users that belong to this church
+    */
     public HashMap<String, User> members;
+
 
     /**
      * Gets the image's URL in FirebaseStore

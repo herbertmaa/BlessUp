@@ -29,6 +29,7 @@ public class MainActivity extends FireBaseActivity {
         DatabaseReference myRef = database.getReference("message");
     }
 
+
     public void onSelectReligionClick(View view) {
         Intent i = new Intent(this, ReligionSelectionActivity.class);
         startActivity(i);

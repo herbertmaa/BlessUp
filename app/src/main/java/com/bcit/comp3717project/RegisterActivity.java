@@ -59,7 +59,7 @@ public class RegisterActivity extends FireBaseActivity {
 
     /**
      * Registers a user to firebase and the app
-     * @param view
+     * @param view - The view this onclick listener is attached to
      */
     public void register(View view) {
 

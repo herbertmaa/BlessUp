@@ -34,6 +34,7 @@ public class ChatMessage {
      */
     private String messageType;
 
+
     /**
      * No Param Constructor
      */

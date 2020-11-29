@@ -24,6 +24,9 @@ public class ViewChurchesActivity extends AppCompatActivity {
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
 
+    /**
+     * A custom fragment page adapter for holding the list and map fragment
+     */
     public class SectionsPageAdapter extends FragmentPagerAdapter {
 
         private int count = 0;
@@ -56,6 +59,7 @@ public class ViewChurchesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_churches);
 
+        // Serve a different view of the activity if it is in horizontal mode
         if(getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
             TabLayout tabLayout = findViewById(R.id.tableLayout);
             ViewPager pager = findViewById(R.id.pager);
