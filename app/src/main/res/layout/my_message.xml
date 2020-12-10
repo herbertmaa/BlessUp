@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="2dp"
+    android:padding="5dp"
+    android:paddingRight="15dp"
+    android:layout_gravity="right"
+    android:clipToPadding="false"
+    android:background="@android:color/transparent"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:layout_alignParentEnd="true"
+        android:clipToPadding="false"
+        android:background="@drawable/my_message">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewMessage"
+            android:textColor="@color/chatMessageBody"
+            android:paddingTop="5dp"
+            android:paddingStart="5dp"
+            android:textSize="18sp"
+            android:layout_alignParentEnd="true"
+            android:text="Placeholder message\nWith two lines"
+            />
+
+        <TextView
+            android:id="@+id/textViewCreatedOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewMessage"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:paddingLeft="40dp"
+            android:text="12:00 AM"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/chatMyTimeStamp"
+            android:textStyle="italic"
+            tools:ignore="RtlCompat" />
+    </RelativeLayout>
+
+</RelativeLayout>

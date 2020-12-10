@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="100dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583">
+
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/indigo_daisy"
+            android:text="@string/action_register"
+            android:textSize="75sp"
+            app:layout_constraintBottom_toTopOf="@+id/loginTextBlurb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/loginTextBlurb"
+            android:layout_width="344dp"
+            android:layout_height="61dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="10dp"
+            android:text="@string/loginTextBlurb"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/FullName"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_name"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="@color/editTextColor" />
+
+        <EditText
+            android:id="@+id/UserEmail"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+            android:textColor="@color/editTextColor" />
+
+        <EditText
+            android:id="@+id/emailPasswordTextField"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_password"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textColor="@color/editTextColor" />
+
+        <EditText
+            android:id="@+id/rePassword"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_view"
+            android:ems="10"
+            android:hint="@string/prompt_repassword"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textColor="@color/editTextColor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginButton"
+            style="@style/linearLayoutChildren"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="register"
+            android:text="@string/action_register"
+            app:backgroundTint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/loginRedirectText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/loginRedirectText" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

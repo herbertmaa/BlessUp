@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#81bfff</color>
+    <color name="colorPrimaryDark">#357ef2</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="backgroundWhite">#FAFAFA</color>
+
+
+    <!--Chat Threads-->
+    <color name="editTextColor">#808080</color>
+    <color name="chatMessageBody">#303030</color>
+    <color name="chatMyMessageBackground"> #fffcf4 </color>
+    <color name="chatMyMessage">#128C7E</color>
+    <color name="chatTheirMessage">#075E54</color>
+    <color name="chatTheirTimeStamp">#8C8B8B</color>
+    <color name="chatMyTimeStamp">#B3B0B0</color>
+    <color name="chatName">#DCDCDC</color>
+    <color name="pureWhite">#FFFFFF</color>
+    <color name="chat_channel_border_color">#FF000000</color>
+
+    <!--Chat Channels-->
+    <color name="channel_colorSelected">#fbffff</color>
+    <color name="channel_messageNotification">#20c253</color>
+    <color name="channel_colorLightGray">#f1f1f1</color>
+    <color name="channel_colorCaption">#000</color>
+
 </resources>

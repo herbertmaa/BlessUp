@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="fragment.MapChurches">
+
+
+    <fragment
+        android:id="@+id/googleMap"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/swipeButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/recyclerView"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-25dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="45dp"
+        app:icon="@drawable/arrow_up" />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/googleMap"
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewChurchesActivity">
+
+    <fragment
+        android:id="@+id/googleMap"
+        android:name="fragment.MapChurches"
+        android:layout_width="345dp"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_map_churches" />
+
+    <fragment
+        android:id="@+id/listChurches"
+        android:name="fragment.ListChurches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_toEndOf="@+id/googleMap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout="@layout/fragment_list_churches" />
+
+</RelativeLayout>
