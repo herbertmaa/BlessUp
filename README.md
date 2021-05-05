@@ -1,5 +1,4 @@
 ## BlessUp
-------
 #### A Mobile Application for Connecting w/ Your Congregation
 
 
